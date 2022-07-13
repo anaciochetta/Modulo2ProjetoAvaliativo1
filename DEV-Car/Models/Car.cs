@@ -14,5 +14,11 @@ class Car : Vehicle
         Horsepower = horsepower;
     }
 
-    //public override string ListVehicleInfo() { }
+    //TODO: 
+    public override string ListVehicleInfo()
+    {
+        return $"{base.ListVehicleInfo()} + infos";
+    }
+
+
 }

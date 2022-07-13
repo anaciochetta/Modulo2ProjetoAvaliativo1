@@ -1,4 +1,5 @@
 using DevCar.Models;
+using DevCar.Repositories;
 
 namespace DevCar.Screens;
 
@@ -8,7 +9,6 @@ public class CreateVehicleScreen
     {
         Console.Clear();
         MenuScreen.DrawCanvas();
-
         SelectVehicleTypeScreen();
     }
 
@@ -28,7 +28,6 @@ public class CreateVehicleScreen
 
         Console.SetCursorPosition(3, 13);
         Console.Write("Digite a opção: ");
-
 
         var option = short.Parse(Console.ReadLine());
         switch (option)
@@ -95,6 +94,8 @@ public class CreateVehicleScreen
             Car car = new Car(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, doorsNumber, fuelType, horsepower);
 
             ShowCarRegistered(car.FabricationYear, car.Name, car.Plate, car.ChassisNumber, car.PurchasePrice, car.SalePrice, car.Color, car.DoorsNumber, car.FuelType, car.Horsepower);
+
+            VehicleRepositoryList.VehicleList.Add(car);
         }
         else if (vehicleType == "pickup")
         {
@@ -113,13 +114,12 @@ public class CreateVehicleScreen
 
             Pickup pickup = new Pickup(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, doorsNumber, fuelType, horsepower, capacity);
 
+            VehicleRepositoryList.VehicleList.Add(pickup);
+
             ShowPickupRegistered(pickup.FabricationYear, pickup.Name, pickup.Plate, pickup.ChassisNumber, pickup.PurchasePrice, pickup.SalePrice, pickup.Color, pickup.DoorsNumber, pickup.FuelType, pickup.Horsepower, pickup.PickupTruckCapacity);
         }
         else if (vehicleType == "moto" || vehicleType == "triciclo")
         {
-            /* Console.SetCursorPosition(3, 10);
-            Console.Write("Total de rodas: ");
-            var wheelNumber = short.Parse(Console.ReadLine()); */
             Console.SetCursorPosition(3, 11);
             Console.Write("Potência (em cavalos): ");
             var horsepower = short.Parse(Console.ReadLine());
@@ -128,20 +128,22 @@ public class CreateVehicleScreen
             {
                 Motorcycle moto = new Motorcycle(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, horsepower);
 
+                VehicleRepositoryList.VehicleList.Add(moto);
+
                 ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, moto.ChassisNumber, purchasePrice, salePrice, color, moto.WheelNumber, horsepower);
             }
             else if (vehicleType == "tricycle")
             {
                 Tricycle tricycle = new Tricycle(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, horsepower);
 
+                VehicleRepositoryList.VehicleList.Add(tricycle);
+
                 ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, tricycle.ChassisNumber, purchasePrice, salePrice, color, tricycle.WheelNumber, horsepower);
             }
-
-
         }
-
     }
 
+    //mostra carro registrado na tela
     private static void ShowCarRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, decimal salePrice, string color, int doorsNumber, string fuelType, decimal horsepower)
     {
         Console.Clear();
@@ -168,10 +170,9 @@ public class CreateVehicleScreen
         Console.Write($"Combustivel: {fuelType}");
         Console.SetCursorPosition(3, 13);
         Console.WriteLine($"Potência: {horsepower} cavalos");
-
-
     }
 
+    //mostra camionete registrado na tela
     private static void ShowPickupRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, decimal salePrice, string color, int doorsNumber, string fuelType, decimal horsepower, decimal pickupTruckCapacity)
     {
         Console.Clear();
@@ -200,13 +201,11 @@ public class CreateVehicleScreen
         Console.WriteLine($"Potência: {horsepower} cavalos");
         Console.SetCursorPosition(3, 14);
         Console.WriteLine($"Capacidade da caçamba: {pickupTruckCapacity} litros");
-
-
     }
 
+    //mostra triciclo e moto registrado na tela
     private static void ShowMotoOrTricycleRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, decimal salePrice, string color, int wheelNumber, decimal horsepower)
     {
-
         Console.Clear();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Camionete cadastrado com sucesso!");

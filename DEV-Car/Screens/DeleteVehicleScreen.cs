@@ -9,7 +9,7 @@ class DeleteVehicleScreen
 
         SelecVehicleToDelete();
     }
-
+    //TODO:
     private static void SelecVehicleToDelete()
     {
         Console.SetCursorPosition(3, 2);
@@ -20,6 +20,5 @@ class DeleteVehicleScreen
         string plate = Console.ReadLine();
 
         Console.ReadLine();
-
     }
 }

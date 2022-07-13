@@ -10,6 +10,7 @@ public class Vehicle
     public decimal SalePrice { get; set; }
     public int BuyerCPF { get; set; }
     public string Color { get; set; }
+    public bool IsAvailable { get; set; }
 
     public Vehicle() { }
     public Vehicle(int fabricationYear, string name, string plate, decimal purchasePrice, decimal salePrice, string color)
@@ -22,12 +23,16 @@ public class Vehicle
         SalePrice = salePrice;
         BuyerCPF = 0;
         Color = color;
+        IsAvailable = true;
     }
 
     public void SellVehicle() { }
+
+    //TODO: precisa colocar as coisas pra printar
     public virtual string ListVehicleInfo()
     {
-        return "";
+        var text = $" Nome: {Name} | Placa: {Plate} | Ano de Fabricação: {FabricationYear}";
+        return text;
     }
     public void ChangeColor() { }
     public void ChangeValue() { }

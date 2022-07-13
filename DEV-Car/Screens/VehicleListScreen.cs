@@ -1,3 +1,5 @@
+using DevCar.Repositories;
+
 namespace DevCar.Screens;
 
 public static class VehicleListScreen
@@ -73,9 +75,18 @@ public static class VehicleListScreen
         }
         else if (filter == "todos")
         {
-
+            Console.Clear();
+            AllVehiclesList();
         }
 
         Console.ReadKey();
+    }
+
+    private static void AllVehiclesList()
+    {
+        foreach (var vehicle in VehicleRepositoryList.VehicleList)
+        {
+            Console.WriteLine(vehicle.ListVehicleInfo());
+        }
     }
 }
