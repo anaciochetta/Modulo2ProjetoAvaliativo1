@@ -7,11 +7,12 @@ class Car : Vehicle
     public decimal Horsepower { get; set; }
 
     public Car() { }
-
-    public Car(int fabricationYear, string name, string plate, decimal purcharseValue, decimal sellValue, string color, int doorsNumber, string fuelType, decimal horsepower) : base(fabricationYear, name, plate, purcharseValue, sellValue, color)
+    public Car(int fabricationYear, string name, string plate, decimal purchasePrice, decimal salePrice, string color, int doorsNumber, string fuelType, decimal horsepower) : base(fabricationYear, name, plate, purchasePrice, salePrice, color)
     {
         DoorsNumber = doorsNumber;
         FuelType = fuelType;
         Horsepower = horsepower;
     }
+
+    //public override string ListVehicleInfo() { }
 }

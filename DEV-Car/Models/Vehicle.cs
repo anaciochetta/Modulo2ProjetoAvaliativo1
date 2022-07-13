@@ -6,26 +6,26 @@ public class Vehicle
     public int FabricationYear { get; set; }
     public string Name { get; set; }
     public string Plate { get; set; }
-    public decimal PurcharseValue { get; set; }
-    public decimal SellValue { get; set; }
+    public decimal PurchasePrice { get; set; }
+    public decimal SalePrice { get; set; }
     public int BuyerCPF { get; set; }
     public string Color { get; set; }
 
     public Vehicle() { }
-    public Vehicle(int fabricationYear, string name, string plate, decimal purcharseValue, decimal sellValue, string color)
+    public Vehicle(int fabricationYear, string name, string plate, decimal purchasePrice, decimal salePrice, string color)
     {
         ChassisNumber = Guid.NewGuid();
         FabricationYear = fabricationYear;
         Name = name;
         Plate = plate;
-        PurcharseValue = purcharseValue;
-        SellValue = sellValue;
+        PurchasePrice = purchasePrice;
+        SalePrice = salePrice;
         BuyerCPF = 0;
         Color = color;
     }
 
     public void SellVehicle() { }
-    public string ListVehicleInfo()
+    public virtual string ListVehicleInfo()
     {
         return "";
     }

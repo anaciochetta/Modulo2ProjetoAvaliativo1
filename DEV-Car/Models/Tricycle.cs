@@ -9,7 +9,7 @@ class Tricycle : Vehicle
     {
         WheelNumber = 3;
     }
-    public Tricycle(int fabricationYear, string name, string plate, decimal purcharseValue, decimal sellValue, string color, int wheelNumber, decimal horsepower) : base(fabricationYear, name, plate, purcharseValue, sellValue, color)
+    public Tricycle(int fabricationYear, string name, string plate, decimal purcharseValue, decimal sellValue, string color, decimal horsepower) : base(fabricationYear, name, plate, purcharseValue, sellValue, color)
     {
         WheelNumber = 3;
         Horsepower = horsepower;
