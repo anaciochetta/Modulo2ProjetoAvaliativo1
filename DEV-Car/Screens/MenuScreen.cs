@@ -1,3 +1,4 @@
+
 namespace DevCar.Screens;
 
 public class MenuScreen
@@ -18,7 +19,7 @@ public class MenuScreen
                 ModifyVehicleScreen.Init();
                 break;
             case 3:
-                DeleteVehicleScreen.Init();
+                SellVehicleScreen.Init();
                 break;
             case 4:
                 VehicleListScreen.Init();
@@ -47,7 +48,7 @@ public class MenuScreen
         Console.SetCursorPosition(3, 6);
         Console.WriteLine("2 - Modificar veículo");
         Console.SetCursorPosition(3, 7);
-        Console.WriteLine("3 - Excluir veículo");
+        Console.WriteLine("3 - Vender veículo");
         Console.SetCursorPosition(3, 8);
         Console.WriteLine("4 - Listas de veículos");
         Console.SetCursorPosition(3, 9);

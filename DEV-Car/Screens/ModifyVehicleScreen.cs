@@ -20,7 +20,6 @@ public static class ModifyVehicleScreen
         string plate = Console.ReadLine();
 
         SelectChangeScreen(plate);
-
     }
     private static void SelectChangeScreen(string plate)
     {
@@ -35,7 +34,7 @@ public static class ModifyVehicleScreen
         Console.SetCursorPosition(3, 5);
         Console.WriteLine("2 - Valor");
         Console.SetCursorPosition(3, 6);
-        Console.WriteLine("3 - Cor e valor");
+        Console.WriteLine("3 - Exlcuir veículo");
         Console.SetCursorPosition(3, 7);
         Console.WriteLine("0 - Voltar para o menu");
 
@@ -52,7 +51,7 @@ public static class ModifyVehicleScreen
                 ChangeValue(plate);
                 break;
             case 3:
-                ChangeBoth(plate);
+                DeleteVehicle(plate);
                 break;
             case 0:
                 MenuScreen.Init();
@@ -94,11 +93,8 @@ public static class ModifyVehicleScreen
         Console.WriteLine("Valor de venda: ");
         var purchasePrice = decimal.Parse(Console.ReadLine());
     }
-    private static void ChangeBoth(string plate)
+    private static void DeleteVehicle(string plate)
     {
-        ChangeColor(plate);
-        ChangeValue(plate);
+
     }
-
-
 }
