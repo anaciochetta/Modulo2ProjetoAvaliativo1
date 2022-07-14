@@ -19,19 +19,18 @@ public static class VehicleReportScreen
     private static void AvailableList()
     {
         Console.Clear();
-        Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Carros disponíveis");
-        Console.SetCursorPosition(3, 3);
+        MenuScreen.PrintHorizontalLine();
+        Console.WriteLine("Veículo disponíveis");
         Console.WriteLine("---------------------------------");
 
         FilterAvailableVehicles();
 
-        Console.ReadKey();
+        MenuScreen.PrintHorizontalLine();
+        MenuScreen.ControlKey();
     }
 
     private static void FilterAvailableVehicles()
     {
-
         foreach (var availables in VehicleRepositoryList.VehicleList)
         {
             if (availables.IsAvailable == true) { Console.WriteLine(availables.ListVehicleInfo()); }
@@ -40,14 +39,13 @@ public static class VehicleReportScreen
     private static void SoldList()
     {
         Console.Clear();
-        MenuScreen.DrawCanvas();
-        Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Carros vendidos");
-        Console.SetCursorPosition(3, 3);
-        Console.WriteLine("---------------------------------");
+        MenuScreen.PrintHorizontalLine();
+        Console.WriteLine("Veículo vendidos");
 
         FilterSoldVehicles();
-        Console.ReadKey();
+
+        MenuScreen.PrintHorizontalLine();
+        MenuScreen.ControlKey();
     }
 
     private static void FilterSoldVehicles()

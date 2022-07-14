@@ -84,4 +84,27 @@ public class MenuScreen
         Console.Write("+");
         Console.Write(Environment.NewLine);
     }
+
+    public static void ControlKey()
+    {
+        Console.WriteLine("");
+        Console.WriteLine("Aperte ENTER para voltar ao menu...");
+        ConsoleKeyInfo key;
+        bool isEnter = true;
+        while (isEnter)
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Escape)
+            {
+                isEnter = false;
+                break;
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                Console.Clear();
+                MenuScreen.Init();
+            }
+        }
+    }
 }

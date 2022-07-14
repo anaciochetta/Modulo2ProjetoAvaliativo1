@@ -59,5 +59,7 @@ class CreateMotoOrTricycleScreen
         Console.Write($"Quantidade de rodas: {wheelNumber}");
         Console.SetCursorPosition(3, 12);
         Console.WriteLine($"Potência: {horsepower} cavalos");
+
+        MenuScreen.ControlKey();
     }
 }

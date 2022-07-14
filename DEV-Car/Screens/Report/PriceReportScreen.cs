@@ -18,7 +18,7 @@ public static class PriceReportScreen
         Console.Clear();
         MenuScreen.DrawCanvas();
         Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Carro vendido com o maior preço:");
+        Console.WriteLine("Veículo vendido com o maior preço:");
         Console.SetCursorPosition(3, 3);
         Console.WriteLine("---------------------------------");
 
@@ -26,14 +26,14 @@ public static class PriceReportScreen
 
         Console.SetCursorPosition(3, 5);
         Console.WriteLine($"{higherPrice}");
-        Console.ReadKey();
+        MenuScreen.ControlKey();
     }
 
     private static void LowerPrice()
     {
         Console.Clear();
         Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Carro vendido com o menor preço:");
+        Console.WriteLine("Veículo vendido com o menor preço:");
         Console.SetCursorPosition(3, 3);
         Console.WriteLine("---------------------------------");
 
@@ -41,7 +41,7 @@ public static class PriceReportScreen
 
         Console.SetCursorPosition(3, 5);
         Console.WriteLine($"{lowerPrice}");
-        Console.ReadKey();
+        MenuScreen.ControlKey();
     }
 
     // TODO: arrumar a lógica

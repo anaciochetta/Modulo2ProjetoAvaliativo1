@@ -55,5 +55,7 @@ public static class CreateCarScreen
         Console.Write($"Combustivel: {fuelType}");
         Console.SetCursorPosition(3, 13);
         Console.WriteLine($"Potência: {horsepower} cavalos");
+
+        MenuScreen.ControlKey();
     }
 }

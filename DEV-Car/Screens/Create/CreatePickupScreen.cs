@@ -61,5 +61,7 @@ class CreatePickupScreen
         Console.WriteLine($"Potência: {horsepower} cavalos");
         Console.SetCursorPosition(3, 14);
         Console.WriteLine($"Capacidade da caçamba: {pickupTruckCapacity} litros");
+
+        MenuScreen.ControlKey();
     }
 }

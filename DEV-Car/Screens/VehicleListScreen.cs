@@ -79,7 +79,7 @@ public static class VehicleListScreen
             AllVehiclesList();
         }
 
-        Console.ReadKey();
+        MenuScreen.ControlKey();
     }
 
     private static void AllVehiclesList()
