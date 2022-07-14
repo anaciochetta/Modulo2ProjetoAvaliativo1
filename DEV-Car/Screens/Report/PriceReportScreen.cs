@@ -47,6 +47,7 @@ public static class PriceReportScreen
     // TODO: arrumar a lógica
     private static decimal FilterSalePrice(bool lowerPrice)
     {
+
         if (lowerPrice)
         {
             var price = 2;

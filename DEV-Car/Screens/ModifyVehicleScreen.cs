@@ -1,3 +1,5 @@
+using DevCar.Repositories;
+
 namespace DevCar.Screens;
 
 public static class ModifyVehicleScreen
@@ -17,9 +19,68 @@ public static class ModifyVehicleScreen
 
         Console.SetCursorPosition(3, 4);
         Console.WriteLine("Placa: ");
+        Console.SetCursorPosition(3, 5);
         string plate = Console.ReadLine();
 
-        SelectChangeScreen(plate);
+        if (CheckPlate(plate))
+        {
+            ConfirmVehicle(plate);
+        }
+        else
+        {
+            System.Console.WriteLine("Placa não encontrada, deseja tentar novamente?");
+            var answer = Console.ReadLine();
+            if (answer == "S" || answer == "s")
+            {
+                Console.Clear();
+                SelecVehicleToModify();
+            }
+            else if (answer == "N" || answer == "n")
+            {
+                Console.Clear();
+                MenuScreen.Init();
+            }
+            else
+            {
+                System.Console.WriteLine("Resposta Inválida, tente novamente!");
+                ConfirmVehicle(plate);
+            }
+        }
+    }
+
+    private static bool CheckPlate(string plate)
+    {
+        var inventory = VehicleRepositoryList.VehicleList;
+        if (inventory.Any(vehicle => vehicle.Plate == plate))
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    private static void ConfirmVehicle(string plate)
+    {
+        Console.Clear();
+        System.Console.WriteLine("Este é o veículo que deseja alterar?");
+        foreach (var vehicle in VehicleRepositoryList.VehicleList)
+        {
+            if (vehicle.Plate == plate) { Console.WriteLine(vehicle.ListVehicleInfo()); }
+        }
+        System.Console.WriteLine("Digite S para sim e N para não");
+        var answer = Console.ReadLine();
+        if (answer == "S" || answer == "s")
+        {
+            SelectChangeScreen(plate);
+        }
+        else if (answer == "N" || answer == "n")
+        {
+            SelecVehicleToModify();
+        }
+        else
+        {
+            System.Console.WriteLine("Resposta Inválida, tente novamente!");
+            ConfirmVehicle(plate);
+        }
     }
     private static void SelectChangeScreen(string plate)
     {
