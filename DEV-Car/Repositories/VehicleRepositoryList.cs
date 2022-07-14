@@ -10,4 +10,8 @@ public static class VehicleRepositoryList
     {
         VehicleList = new List<Vehicle>();
     }
+    public static void UpdateRepository() { }
+    public static Vehicle? GetByPlate(string plate)
+    { return VehicleList.Where(x => x.Plate == plate).FirstOrDefault(); }
+
 }

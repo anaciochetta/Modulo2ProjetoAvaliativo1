@@ -1,11 +1,14 @@
 namespace DevCar.Models;
 
-class Pickup : Car
+class Pickup : Vehicle
 {
     public decimal PickupTruckCapacity { get; set; } //capacidade da caçamba
+    public int DoorsNumber { get; set; }
+    public string FuelType { get; set; }
+    public decimal Horsepower { get; set; }
 
     public Pickup() { }
-    public Pickup(int fabricationYear, string name, string plate, decimal purchasePrice, decimal salePrice, string color, int doorsNumber, string fuelType, decimal horsepower, decimal pickupTruckCapacity) : base(fabricationYear, name, plate, purchasePrice, salePrice, color, doorsNumber, fuelType, horsepower)
+    public Pickup(int fabricationYear, string name, string plate, decimal purchasePrice, EColors color, int doorsNumber, string fuelType, decimal horsepower, decimal pickupTruckCapacity) : base(fabricationYear, name, plate, purchasePrice, color)
     {
         PickupTruckCapacity = pickupTruckCapacity;
     }

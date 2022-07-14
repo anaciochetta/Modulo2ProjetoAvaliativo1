@@ -1,4 +1,5 @@
 using DevCar.Screens.Create;
+using DevCar.Utils;
 
 namespace DevCar.Screens;
 
@@ -74,23 +75,22 @@ public class CreateVehicleScreen
         Console.Write("Valor de compra: ");
         var purchasePrice = decimal.Parse(Console.ReadLine());
         Console.SetCursorPosition(3, 8);
-        Console.Write("Valor de venda: ");
-        var salePrice = decimal.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 9);
-        Console.Write("Cor: ");
-        string color = Console.ReadLine();
+        Console.Clear();
+        EColors color = (EColors)ColorsUtil.PrintColorsOptions();
+        System.Console.WriteLine(color);
+        Console.Clear();
 
         if (vehicleType == "carro")
         {
-            CreateCarScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color);
+            CreateCarScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color);
         }
         else if (vehicleType == "pickup")
         {
-            CreatePickupScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color);
+            CreatePickupScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color);
         }
         else if (vehicleType == "moto" || vehicleType == "triciclo")
         {
-            CreateMotoOrTricycleScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, vehicleType);
+            CreateMotoOrTricycleScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, vehicleType);
         }
     }
 }

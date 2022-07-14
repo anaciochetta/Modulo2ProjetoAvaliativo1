@@ -5,39 +5,41 @@ namespace DevCar.Screens.Create;
 
 class CreateMotoOrTricycleScreen
 {
-    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, decimal salePrice, string color, string vehicleType)
+    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, string vehicleType)
     {
-        CreateMotoOrTricycle(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, vehicleType);
+        CreateMotoOrTricycle(fabricationYear, vehicleName, plate, purchasePrice, color, vehicleType);
     }
 
-    private static void CreateMotoOrTricycle(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, decimal salePrice, string color, string vehicleType)
+    private static void CreateMotoOrTricycle(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, string vehicleType)
     {
-        Console.SetCursorPosition(3, 11);
+        MenuScreen.DrawCanvas();
+        Console.SetCursorPosition(3, 3);
         Console.Write("Potência (em cavalos): ");
         var horsepower = short.Parse(Console.ReadLine());
 
         if (vehicleType == "moto")
         {
-            Motorcycle moto = new(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, horsepower);
+            Motorcycle moto = new(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower);
 
             VehicleRepositoryList.VehicleList.Add(moto);
 
-            ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, moto.ChassisNumber, purchasePrice, salePrice, color, moto.WheelNumber, horsepower);
+            ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, moto.ChassisNumber, purchasePrice, color, moto.WheelNumber, horsepower);
         }
         else if (vehicleType == "tricycle")
         {
-            Tricycle tricycle = new(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, horsepower);
+            Tricycle tricycle = new(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower);
 
             VehicleRepositoryList.VehicleList.Add(tricycle);
 
-            ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, tricycle.ChassisNumber, purchasePrice, salePrice, color, tricycle.WheelNumber, horsepower);
+            ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, tricycle.ChassisNumber, purchasePrice, color, tricycle.WheelNumber, horsepower);
         }
     }
 
     //mostra triciclo e moto registrado na tela
-    private static void ShowMotoOrTricycleRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, decimal salePrice, string color, int wheelNumber, decimal horsepower)
+    private static void ShowMotoOrTricycleRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int wheelNumber, decimal horsepower)
     {
         Console.Clear();
+
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Camionete cadastrado com sucesso!");
 
@@ -50,14 +52,12 @@ class CreateMotoOrTricycleScreen
         Console.SetCursorPosition(3, 7);
         Console.Write($"Ano de fabricação: {fabricationYear} ");
         Console.SetCursorPosition(3, 8);
-        Console.WriteLine($"Valor de venda: {salePrice} reais");
-        Console.SetCursorPosition(3, 9);
         Console.WriteLine($"Valor de compra: {purchasePrice} reais");
-        Console.SetCursorPosition(3, 10);
+        Console.SetCursorPosition(3, 9);
         Console.Write($"Cor: {color}");
-        Console.SetCursorPosition(3, 11);
+        Console.SetCursorPosition(3, 10);
         Console.Write($"Quantidade de rodas: {wheelNumber}");
-        Console.SetCursorPosition(3, 12);
+        Console.SetCursorPosition(3, 11);
         Console.WriteLine($"Potência: {horsepower} cavalos");
 
         MenuScreen.ControlKey();

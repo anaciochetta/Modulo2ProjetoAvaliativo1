@@ -1,3 +1,5 @@
+using DevCar.Repositories;
+
 namespace DevCar.Models;
 
 public class Vehicle
@@ -6,27 +8,33 @@ public class Vehicle
     public int FabricationYear { get; set; }
     public string Name { get; set; }
     public string Plate { get; set; }
-    public decimal PurchasePrice { get; set; }
-    public decimal SalePrice { get; set; }
-    public int BuyerCPF { get; set; }
-    public string Color { get; set; }
+    public decimal PurchasePrice { get; private set; }
+    public string BuyerCPF { get; set; }
+    public EColors Color { get; private set; }
     public bool IsAvailable { get; set; }
 
     public Vehicle() { }
-    public Vehicle(int fabricationYear, string name, string plate, decimal purchasePrice, decimal salePrice, string color)
+    public Vehicle(int fabricationYear, string name, string plate, decimal purchasePrice, EColors color)
     {
         ChassisNumber = Guid.NewGuid();
         FabricationYear = fabricationYear;
         Name = name;
         Plate = plate;
         PurchasePrice = purchasePrice;
-        SalePrice = salePrice;
-        BuyerCPF = 0;
+        BuyerCPF = "0";
         Color = color;
         IsAvailable = true;
     }
 
-    public void SellVehicle() { }
+    public void SellVehicle(string buyerCPF, decimal salePrice)
+    {
+        TransferVehicles tansfer = new TransferVehicles(this, buyerCPF, salePrice);
+
+        TransferVehicles transferdVehicle = new();
+        TransferRepository.TransferData.Add(transferdVehicle);
+
+        this.BuyerCPF = buyerCPF;
+    }
 
     //TODO: precisa colocar as coisas pra printar
     public virtual string ListVehicleInfo()
@@ -34,7 +42,14 @@ public class Vehicle
         var text = $" Nome: {Name} | Placa: {Plate} | Ano de Fabricação: {FabricationYear}";
         return text;
     }
-    public void ChangeColor() { }
-    public void ChangeValue() { }
+    public void ChangeColor(EColors color)
+    {
+        this.Color = color;
+    }
+    public void ChangePurchasePrice(decimal purchasePrice)
+    {
+        this.PurchasePrice = purchasePrice;
+    }
+
 
 }

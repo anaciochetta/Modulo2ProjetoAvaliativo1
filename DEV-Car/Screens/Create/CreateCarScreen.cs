@@ -5,33 +5,35 @@ namespace DevCar.Screens.Create;
 
 public static class CreateCarScreen
 {
-    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, decimal salePrice, string color)
+    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
     {
-        CreateCar(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color);
+        CreateCar(fabricationYear, vehicleName, plate, purchasePrice, color);
     }
-    private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, decimal salePrice, string color)
+    private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
     {
-        Console.SetCursorPosition(3, 10);
+        MenuScreen.DrawCanvas();
+        Console.SetCursorPosition(3, 2);
         Console.Write("Total de portas: ");
         var doorsNumber = short.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 11);
+        Console.SetCursorPosition(3, 3);
         Console.Write("Flex ou somente gasolina: ");
         string fuelType = Console.ReadLine();
-        Console.SetCursorPosition(3, 12);
+        Console.SetCursorPosition(3, 4);
         Console.Write("Potência (em cavalos): ");
         var horsepower = short.Parse(Console.ReadLine());
 
-        Car car = new(fabricationYear, vehicleName, plate, purchasePrice, salePrice, color, doorsNumber, fuelType, horsepower);
+        Car car = new(fabricationYear, vehicleName, plate, purchasePrice, color, doorsNumber, fuelType, horsepower);
 
-        ShowCarRegistered(car.FabricationYear, car.Name, car.Plate, car.ChassisNumber, car.PurchasePrice, car.SalePrice, car.Color, car.DoorsNumber, car.FuelType, car.Horsepower);
+        ShowCarRegistered(car.FabricationYear, car.Name, car.Plate, car.ChassisNumber, car.PurchasePrice, car.Color, car.DoorsNumber, car.FuelType, car.Horsepower);
 
         VehicleRepositoryList.VehicleList.Add(car);
     }
 
     //mostra carro registrado na tela
-    private static void ShowCarRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, decimal salePrice, string color, int doorsNumber, string fuelType, decimal horsepower)
+    private static void ShowCarRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int doorsNumber, string fuelType, decimal horsepower)
     {
         Console.Clear();
+        MenuScreen.DrawCanvas();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Carro cadastrado com sucesso!");
 
@@ -44,16 +46,14 @@ public static class CreateCarScreen
         Console.SetCursorPosition(3, 7);
         Console.Write($"Ano de fabricação: {fabricationYear} ");
         Console.SetCursorPosition(3, 8);
-        Console.WriteLine($"Valor de venda: {salePrice} reais");
-        Console.SetCursorPosition(3, 9);
         Console.WriteLine($"Valor de compra: {purchasePrice} reais");
-        Console.SetCursorPosition(3, 10);
+        Console.SetCursorPosition(3, 9);
         Console.Write($"Cor: {color}");
-        Console.SetCursorPosition(3, 11);
+        Console.SetCursorPosition(3, 10);
         Console.Write($"Quantidade de portas: {doorsNumber}");
-        Console.SetCursorPosition(3, 12);
+        Console.SetCursorPosition(3, 11);
         Console.Write($"Combustivel: {fuelType}");
-        Console.SetCursorPosition(3, 13);
+        Console.SetCursorPosition(3, 12);
         Console.WriteLine($"Potência: {horsepower} cavalos");
 
         MenuScreen.ControlKey();

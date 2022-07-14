@@ -1,4 +1,6 @@
 using DevCar.Repositories;
+using DevCar.Models;
+using DevCar.Utils;
 
 namespace DevCar.Screens;
 
@@ -8,14 +10,15 @@ public static class ModifyVehicleScreen
     {
         Console.Clear();
         MenuScreen.DrawCanvas();
-
         SelecVehicleToModify();
     }
 
+    //tela para colocar a placa do veículo para modificação
     private static void SelecVehicleToModify()
     {
+        MenuScreen.PrintHorizontalLine();
         Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Escreva a placa do veículo para realizar a alteração:");
+        Console.WriteLine("Digite a placa do veículo para modificação:");
 
         Console.SetCursorPosition(3, 4);
         Console.WriteLine("Placa: ");
@@ -28,7 +31,11 @@ public static class ModifyVehicleScreen
         }
         else
         {
-            System.Console.WriteLine("Placa não encontrada, deseja tentar novamente?");
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Placa não encontrada!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Deseja tentar novamente? (S ou N)");
+            Console.SetCursorPosition(3, 8);
             var answer = Console.ReadLine();
             if (answer == "S" || answer == "s")
             {
@@ -42,12 +49,14 @@ public static class ModifyVehicleScreen
             }
             else
             {
-                System.Console.WriteLine("Resposta Inválida, tente novamente!");
+                Console.WriteLine("Resposta Inválida, tente novamente!");
                 ConfirmVehicle(plate);
             }
         }
+        MenuScreen.PrintHorizontalLine();
     }
 
+    //verifica se a placa existe no repositório
     private static bool CheckPlate(string plate)
     {
         var inventory = VehicleRepositoryList.VehicleList;
@@ -58,16 +67,18 @@ public static class ModifyVehicleScreen
         else return false;
     }
 
+    //tela para confirmar o veículo selecionado
     private static void ConfirmVehicle(string plate)
     {
         Console.Clear();
-        System.Console.WriteLine("Este é o veículo que deseja alterar?");
-        foreach (var vehicle in VehicleRepositoryList.VehicleList)
-        {
-            if (vehicle.Plate == plate) { Console.WriteLine(vehicle.ListVehicleInfo()); }
-        }
+        MenuScreen.PrintHorizontalLine();
+        Console.WriteLine("Este é o veículo que deseja alterar?");
+        Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
+        System.Console.WriteLine(vehicle.ListVehicleInfo());
+        System.Console.WriteLine("");
         System.Console.WriteLine("Digite S para sim e N para não");
         var answer = Console.ReadLine();
+        MenuScreen.PrintHorizontalLine();
         if (answer == "S" || answer == "s")
         {
             SelectChangeScreen(plate);
@@ -82,6 +93,8 @@ public static class ModifyVehicleScreen
             ConfirmVehicle(plate);
         }
     }
+
+    //tela e método para escolher a modificação a ser feita
     private static void SelectChangeScreen(string plate)
     {
         Console.Clear();
@@ -93,7 +106,7 @@ public static class ModifyVehicleScreen
         Console.SetCursorPosition(3, 4);
         Console.WriteLine("1 - Cor");
         Console.SetCursorPosition(3, 5);
-        Console.WriteLine("2 - Valor");
+        Console.WriteLine("2 - Valor de compra");
         Console.SetCursorPosition(3, 6);
         Console.WriteLine("3 - Exlcuir veículo");
         Console.SetCursorPosition(3, 7);
@@ -109,7 +122,7 @@ public static class ModifyVehicleScreen
                 ChangeColor(plate);
                 break;
             case 2:
-                ChangeValue(plate);
+                ChangePrice(plate);
                 break;
             case 3:
                 DeleteVehicle(plate);
@@ -128,18 +141,15 @@ public static class ModifyVehicleScreen
         Console.Clear();
         MenuScreen.DrawCanvas();
 
-        Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Escolha a cor desejada:");
+        EColors color = (EColors)ColorsUtil.PrintColorsOptions();
+        System.Console.WriteLine(color);
 
-        Console.SetCursorPosition(3, 4);
-        Console.WriteLine("1 - Cor");
-        Console.SetCursorPosition(3, 13);
-        Console.Write("Digite a opção: ");
-        Console.ReadLine();
-
-
+        Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
+        vehicle.ChangeColor(color);
     }
-    private static void ChangeValue(string plate)
+
+    //TODO: separar o tipo de valor pra mudar
+    private static void ChangePrice(string plate)
     {
         Console.Clear();
         MenuScreen.DrawCanvas();
@@ -149,13 +159,14 @@ public static class ModifyVehicleScreen
 
         Console.SetCursorPosition(3, 4);
         Console.WriteLine("Valor de compra: ");
-        var salePrice = decimal.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 4);
-        Console.WriteLine("Valor de venda: ");
-        var purchasePrice = decimal.Parse(Console.ReadLine());
+        decimal salePrice = decimal.Parse(Console.ReadLine());
+        Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
+        vehicle.ChangePurchasePrice(salePrice);
     }
     private static void DeleteVehicle(string plate)
     {
-
+        Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
+        IList<Vehicle> repository = VehicleRepositoryList.VehicleList;
+        repository.Remove(vehicle);
     }
 }

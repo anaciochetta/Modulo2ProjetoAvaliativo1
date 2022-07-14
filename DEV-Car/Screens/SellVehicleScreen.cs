@@ -23,11 +23,15 @@ public static class SellVehicleScreen
         Console.SetCursorPosition(3, 4);
         Console.WriteLine("CPF do comprador: ");
         string buyerCPF = Console.ReadLine();
+        Console.WriteLine("CPF do comprador: ");
+        decimal salePrice = decimal.Parse(Console.ReadLine());
+
+        SellVehicle(plate, buyerCPF, salePrice);
     }
 
-    private static void TransferVehicle()
+    private static void SellVehicle(string plate, string buyerCPF, decimal salePrice)
     {
-        TransferVehicles transferdVehicle = new();
-        TransferRepository.TransferData.Add(transferdVehicle);
+        Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
+        vehicle.SellVehicle(buyerCPF, salePrice);
     }
 }

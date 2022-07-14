@@ -7,7 +7,7 @@ class Car : Vehicle
     public decimal Horsepower { get; set; }
 
     public Car() { }
-    public Car(int fabricationYear, string name, string plate, decimal purchasePrice, decimal salePrice, string color, int doorsNumber, string fuelType, decimal horsepower) : base(fabricationYear, name, plate, purchasePrice, salePrice, color)
+    public Car(int fabricationYear, string name, string plate, decimal purchasePrice, EColors color, int doorsNumber, string fuelType, decimal horsepower) : base(fabricationYear, name, plate, purchasePrice, color)
     {
         DoorsNumber = doorsNumber;
         FuelType = fuelType;

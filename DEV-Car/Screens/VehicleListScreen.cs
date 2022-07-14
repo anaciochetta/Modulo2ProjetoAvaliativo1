@@ -1,4 +1,5 @@
 using DevCar.Repositories;
+using DevCar.Models;
 
 namespace DevCar.Screens;
 
@@ -29,62 +30,42 @@ public static class VehicleListScreen
         Console.SetCursorPosition(3, 13);
         Console.Write("Digite a opção: ");
 
-
         var option = short.Parse(Console.ReadLine());
         switch (option)
         {
             case 1:
-                ShowList("carro");
+                FilterandPrintByType<Car>();
                 break;
             case 2:
-                ShowList("moto");
+                FilterandPrintByType<Motorcycle>();
                 break;
             case 3:
-                ShowList("triciclo");
+                FilterandPrintByType<Tricycle>();
                 break;
-
             case 4:
-                ShowList("pickup");
+                FilterandPrintByType<Pickup>();
                 break;
             case 5:
-                ShowList("todos");
+                AllVehiclesList();
                 break;
             default:
                 MenuScreen.Init();
                 break;
         }
     }
-
-    private static void ShowList(string filter)
-    {
-        if (filter == "carro")
-        {
-
-        }
-        else if (filter == "pickup")
-        {
-
-        }
-        else if (filter == "moto")
-        {
-
-        }
-        else if (filter == "triciclo")
-        {
-
-        }
-        else if (filter == "todos")
-        {
-            Console.Clear();
-            AllVehiclesList();
-        }
-
-        MenuScreen.ControlKey();
-    }
-
     private static void AllVehiclesList()
     {
         foreach (var vehicle in VehicleRepositoryList.VehicleList)
+        {
+            Console.WriteLine(vehicle.ListVehicleInfo());
+        }
+    }
+
+    private static void FilterandPrintByType<T>() where T : Vehicle
+    {
+        IList<Vehicle> repository = VehicleRepositoryList.VehicleList;
+        var vehicles = repository.OfType<T>().ToList();
+        foreach (var vehicle in vehicles)
         {
             Console.WriteLine(vehicle.ListVehicleInfo());
         }
