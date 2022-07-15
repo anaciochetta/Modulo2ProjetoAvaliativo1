@@ -12,13 +12,14 @@ public static class CreateCarScreen
     }
     private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
     {
+        EFuel fuelType = (EFuel)FuelUtil.PrintCarFuelOptions();
+        Console.Clear();
         MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 2);
+        Console.Write($"Flex ou somente gasolina: {fuelType}");
+        Console.SetCursorPosition(3, 3);
         Console.Write("Total de portas: ");
         var doorsNumber = short.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 3);
-        Console.Write("Flex ou somente gasolina: ");
-        string fuelType = Console.ReadLine();
         Console.SetCursorPosition(3, 4);
         Console.Write("Potência (em cavalos): ");
         var horsepower = short.Parse(Console.ReadLine());
@@ -30,10 +31,9 @@ public static class CreateCarScreen
         VehicleRepositoryList.VehicleList.Add(car);
     }
     //mostra carro registrado na tela
-    private static void ShowCarRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int doorsNumber, string fuelType, decimal horsepower)
+    private static void ShowCarRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int doorsNumber, EFuel fuelType, decimal horsepower)
     {
-        Console.Clear();
-        MenuUtils.DrawCanvas();
+        MenuUtils.DrawSimpleCanvas();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Carro cadastrado com sucesso!");
 

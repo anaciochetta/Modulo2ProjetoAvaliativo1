@@ -7,3 +7,10 @@ public enum EColors
     Azul = 3,
     Roxo = 4
 }
+
+public enum EFuel
+{
+    Gasolina = 10,
+    Flex = 20,
+    Diesel = 30
+}

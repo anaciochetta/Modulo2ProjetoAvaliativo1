@@ -54,14 +54,13 @@ public static class ModifyVehicleScreen
     //método para mudar a cor do veículo
     private static void ChangeColor(string plate)
     {
-        Console.Clear();
-        MenuUtils.DrawCanvas();
-
         EColors color = (EColors)ColorsUtil.PrintColorsOptions();
         System.Console.WriteLine(color);
-
+        Console.Clear();
+        MenuUtils.DrawCanvas();
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         vehicle.ChangeColor(color);
+        MenuUtils.ControlKey();
     }
     //método para mudar o preço de compra do veículo
     private static void ChangePrice(string plate)
@@ -77,6 +76,7 @@ public static class ModifyVehicleScreen
         decimal salePrice = decimal.Parse(Console.ReadLine());
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         vehicle.ChangePurchasePrice(salePrice);
+        MenuUtils.ControlKey();
     }
     //método para deletar veículo do repositório
     private static void DeleteVehicle(string plate)
@@ -84,5 +84,7 @@ public static class ModifyVehicleScreen
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         IList<Vehicle> repository = VehicleRepositoryList.VehicleList;
         repository.Remove(vehicle);
+        Console.WriteLine("Veículo removido com sucesso!");
+        MenuUtils.ControlKey();
     }
 }

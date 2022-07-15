@@ -12,18 +12,19 @@ class CreatePickupScreen
     }
     private static void CreatePickup(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
     {
+        EFuel fuelType = (EFuel)FuelUtil.PrintPickupFuelOptions();
+        Console.Clear();
         MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 3);
+        Console.Write($"Diesel ou gasolina: {fuelType}");
+        Console.SetCursorPosition(3, 4);
         Console.Write("Total de portas: ");
         var doorsNumber = short.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 4);
-        Console.Write("Diesel ou gasolina: ");
-        string fuelType = Console.ReadLine();
         Console.SetCursorPosition(3, 5);
         Console.Write("Potência (em cavalos): ");
         var horsepower = short.Parse(Console.ReadLine());
         Console.SetCursorPosition(3, 6);
-        Console.Write("Capacidade de carregamento na caçamba (em litros): ");
+        Console.Write("Capacidade de carregamento (litros): ");
         var capacity = decimal.Parse(Console.ReadLine());
 
         Pickup pickup = new(fabricationYear, vehicleName, plate, purchasePrice, color, doorsNumber, fuelType, horsepower, capacity);
@@ -33,11 +34,11 @@ class CreatePickupScreen
         ShowPickupRegistered(pickup.FabricationYear, pickup.Name, pickup.Plate, pickup.ChassisNumber, pickup.PurchasePrice, pickup.Color, pickup.DoorsNumber, pickup.FuelType, pickup.Horsepower, pickup.PickupTruckCapacity);
     }
     //mostra camionete registrado na tela
-    private static void ShowPickupRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int doorsNumber, string fuelType, decimal horsepower, decimal pickupTruckCapacity)
+    private static void ShowPickupRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int doorsNumber, EFuel fuelType, decimal horsepower, decimal pickupTruckCapacity)
     {
-        Console.Clear();
+        MenuUtils.DrawSimpleCanvas();
         Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Camionete cadastrado com sucesso!");
+        Console.WriteLine("Camionete cadastrada com sucesso!");
 
         Console.SetCursorPosition(3, 4);
         Console.WriteLine($"Name: {name}");

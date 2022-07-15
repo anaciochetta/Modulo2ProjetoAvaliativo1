@@ -23,7 +23,7 @@ class CreateMotoOrTricycleScreen
 
             VehicleRepositoryList.VehicleList.Add(moto);
 
-            ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, moto.ChassisNumber, purchasePrice, color, moto.WheelNumber, horsepower);
+            ShowMotoRegistered(fabricationYear, vehicleName, plate, moto.ChassisNumber, purchasePrice, color, moto.WheelNumber, horsepower);
         }
         else if (vehicleType == "tricycle")
         {
@@ -31,17 +31,42 @@ class CreateMotoOrTricycleScreen
 
             VehicleRepositoryList.VehicleList.Add(tricycle);
 
-            ShowMotoOrTricycleRegistered(fabricationYear, vehicleName, plate, tricycle.ChassisNumber, purchasePrice, color, tricycle.WheelNumber, horsepower);
+            ShowTricycleRegistered(fabricationYear, vehicleName, plate, tricycle.ChassisNumber, purchasePrice, color, tricycle.WheelNumber, horsepower);
         }
     }
 
-    //mostra triciclo e moto registrado na tela
-    private static void ShowMotoOrTricycleRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int wheelNumber, decimal horsepower)
+    //mostra triciclo registrado na tela
+    private static void ShowTricycleRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int wheelNumber, decimal horsepower)
     {
-        Console.Clear();
-
+        MenuUtils.DrawSimpleCanvas();
         Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Camionete cadastrado com sucesso!");
+        Console.WriteLine("Triciclo cadastrado com sucesso!");
+
+        Console.SetCursorPosition(3, 4);
+        Console.WriteLine($"Name: {name}");
+        Console.SetCursorPosition(3, 5);
+        Console.Write($"Número de Chassi: {chassisNumber}");
+        Console.SetCursorPosition(3, 6);
+        Console.Write($"Placa: {plate}");
+        Console.SetCursorPosition(3, 7);
+        Console.Write($"Ano de fabricação: {fabricationYear} ");
+        Console.SetCursorPosition(3, 8);
+        Console.WriteLine($"Valor de compra: {purchasePrice} reais");
+        Console.SetCursorPosition(3, 9);
+        Console.Write($"Cor: {color}");
+        Console.SetCursorPosition(3, 10);
+        Console.Write($"Quantidade de rodas: {wheelNumber}");
+        Console.SetCursorPosition(3, 11);
+        Console.WriteLine($"Potência: {horsepower} cavalos");
+
+        MenuUtils.ControlKey();
+    }
+    //mostra moto registrada na tela
+    private static void ShowMotoRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int wheelNumber, decimal horsepower)
+    {
+        MenuUtils.DrawSimpleCanvas();
+        Console.SetCursorPosition(3, 2);
+        Console.WriteLine("Moto cadastrada com sucesso!");
 
         Console.SetCursorPosition(3, 4);
         Console.WriteLine($"Name: {name}");

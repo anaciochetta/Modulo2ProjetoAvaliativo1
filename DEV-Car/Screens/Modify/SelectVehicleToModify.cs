@@ -52,13 +52,11 @@ public static class SelectVehicleToModify
                 ConfirmVehicle(plate);
             }
         }
-        MenuUtils.PrintHorizontalLine();
     }
     //tela para confirmar o veículo selecionado
     private static void ConfirmVehicle(string plate)
     {
-        Console.Clear();
-        MenuUtils.PrintHorizontalLine();
+        MenuUtils.DrawSimpleCanvas();
         Console.WriteLine("Este é o veículo que deseja alterar?");
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         System.Console.WriteLine(vehicle.ListVehicleInfo());
