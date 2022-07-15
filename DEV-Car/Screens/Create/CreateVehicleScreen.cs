@@ -1,4 +1,5 @@
 using DevCar.Utils;
+using DevCar.Validators;
 
 namespace DevCar.Screens.Create;
 
@@ -24,6 +25,8 @@ public class CreateVehicleScreen
         Console.WriteLine("3 - Triciclo");
         Console.SetCursorPosition(3, 7);
         Console.WriteLine("4 - Camionete");
+        Console.SetCursorPosition(3, 8);
+        Console.WriteLine("0 - Menu Principal");
 
         Console.SetCursorPosition(3, 13);
         Console.Write("Digite a opção: ");
@@ -51,35 +54,23 @@ public class CreateVehicleScreen
     //monta a tela para criar o veículo e chama as funções de criação
     private static void CreateVehicle(string vehicleType)
     {
-        Console.Clear();
-        MenuUtils.DrawCanvas();
-
-        Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Cadastro de veículo");
-        Console.SetCursorPosition(3, 3);
-        Console.WriteLine("---------------------------------");
-
+        InputHeader();
         Console.SetCursorPosition(3, 4);
         Console.Write("Nome: ");
         string vehicleName = Console.ReadLine();
-        Console.SetCursorPosition(3, 5);
-        Console.Write("Placa: ");
-        string plate = Console.ReadLine();
-        Console.SetCursorPosition(3, 6);
-        Console.Write("Ano de fabricação: ");
-        var fabricationYear = int.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 7);
-        Console.Write("Valor de compra: ");
-        var purchasePrice = decimal.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 8);
+        string plate = InputPlate();
+        int fabricationYear = InputYearFabrication();
+        decimal purchasePrice = InputPurchasePrice();
+        decimal horsepower = InputHorsepower();
+        Console.SetCursorPosition(3, 9);
         Console.Clear();
         EColors color = (EColors)ColorsUtil.PrintColorsOptions();
-        System.Console.WriteLine(color);
+        Console.WriteLine(color);
         Console.Clear();
 
         if (vehicleType == "carro")
         {
-            CreateCarScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color);
+            CreateCarScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower);
         }
         else if (vehicleType == "pickup")
         {
@@ -89,5 +80,54 @@ public class CreateVehicleScreen
         {
             CreateMotoOrTricycleScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, vehicleType);
         }
+    }
+    private static void InputHeader()
+    {
+        Console.Clear();
+        MenuUtils.DrawCanvas();
+        Console.SetCursorPosition(3, 2);
+        Console.WriteLine("Cadastro de veículo");
+        Console.SetCursorPosition(3, 3);
+        Console.WriteLine("---------------------------------");
+    }
+
+    public static string InputPlate()
+    {
+        InputHeader();
+        Console.SetCursorPosition(3, 5);
+        Console.Write("Placa: ");
+        string plate = Console.ReadLine();
+        ValidateInputPlate.ValidatePlate(plate);
+        return plate;
+    }
+    public static int InputYearFabrication()
+    {
+        InputHeader();
+        Console.SetCursorPosition(3, 6);
+        Console.Write("Ano de fabricação: ");
+        int fabricationYear = int.Parse(Console.ReadLine());
+
+        return fabricationYear;
+    }
+
+    public static decimal InputPurchasePrice()
+    {
+        InputHeader();
+        Console.SetCursorPosition(3, 7);
+        Console.Write("Valor de compra: ");
+        decimal purchasePrice = decimal.Parse(Console.ReadLine());
+
+        return purchasePrice;
+    }
+
+    //TODO: ARRUMAR OS OUTROS DA POTENCIA
+
+    public static decimal InputHorsepower()
+    {
+        Console.SetCursorPosition(3, 8);
+        Console.Write("Potência (em cavalos): ");
+        decimal horsepower = short.Parse(Console.ReadLine());
+
+        return horsepower;
     }
 }

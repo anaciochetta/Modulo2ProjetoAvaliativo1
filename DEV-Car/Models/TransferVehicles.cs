@@ -19,6 +19,6 @@ public class TransferVehicles
 
     public override string ToString()
     {
-        return $"preço de venda{SalePrice}, data de venda {Date}, {VehicleData}";
+        return $"Preço de venda: {SalePrice}| Data de venda: {Date} \n Dados do veículo: {VehicleData.ListVehicleInfo()}";
     }
 }

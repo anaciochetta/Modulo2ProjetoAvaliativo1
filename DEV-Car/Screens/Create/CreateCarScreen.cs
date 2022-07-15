@@ -6,11 +6,11 @@ namespace DevCar.Screens.Create;
 
 public static class CreateCarScreen
 {
-    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
+    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower)
     {
-        CreateCar(fabricationYear, vehicleName, plate, purchasePrice, color);
+        CreateCar(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower);
     }
-    private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
+    private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower)
     {
         EFuel fuelType = (EFuel)FuelUtil.PrintCarFuelOptions();
         Console.Clear();
@@ -21,8 +21,7 @@ public static class CreateCarScreen
         Console.Write("Total de portas: ");
         var doorsNumber = short.Parse(Console.ReadLine());
         Console.SetCursorPosition(3, 4);
-        Console.Write("Potência (em cavalos): ");
-        var horsepower = short.Parse(Console.ReadLine());
+
 
         Car car = new(fabricationYear, vehicleName, plate, purchasePrice, color, doorsNumber, fuelType, horsepower);
 

@@ -13,8 +13,14 @@ public static class TransferRepository
 
     public static TransferVehicles? HigherSalePrice()
     {
-        var max = TransferData.Max(x => x.SalePrice);
-        return TransferData.Where(x => x.SalePrice == max).FirstOrDefault(); ;
+        decimal max = TransferData.Max(x => x.SalePrice);
+        return TransferData.Where(x => x.SalePrice == max).FirstOrDefault();
+    }
+
+    public static TransferVehicles? LowerSalePrice()
+    {
+        decimal min = TransferData.Min(x => x.SalePrice);
+        return TransferData.Where(x => x.SalePrice == min).FirstOrDefault();
     }
 
 }

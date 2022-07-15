@@ -27,11 +27,8 @@ public class Vehicle
     }
     public void SellVehicle(string buyerCPF, decimal salePrice)
     {
-        TransferVehicles tansfer = new TransferVehicles(this, buyerCPF, salePrice);
-
-        TransferVehicles transferdVehicle = new();
+        TransferVehicles transferdVehicle = new(this, buyerCPF, salePrice);
         TransferRepository.TransferData.Add(transferdVehicle);
-
         this.BuyerCPF = buyerCPF;
         this.IsAvailable = false;
     }

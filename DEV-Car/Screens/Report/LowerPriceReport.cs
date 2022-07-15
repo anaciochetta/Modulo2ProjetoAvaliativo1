@@ -19,10 +19,10 @@ public static class LowerPriceReport
         Console.SetCursorPosition(3, 3);
         Console.WriteLine("---------------------------------");
 
-        //TransferVehicles vehicle = TransferRepository.LowerSalePrice();
+        TransferVehicles vehicle = TransferRepository.LowerSalePrice();
 
         Console.SetCursorPosition(3, 5);
-        //Console.WriteLine(vehicle.ToString());
+        Console.WriteLine(vehicle.ToString());
         MenuUtils.ControlKey();
     }
 }
