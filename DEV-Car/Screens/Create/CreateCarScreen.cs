@@ -1,5 +1,6 @@
 using DevCar.Models;
 using DevCar.Repositories;
+using DevCar.Utils;
 
 namespace DevCar.Screens.Create;
 
@@ -11,7 +12,7 @@ public static class CreateCarScreen
     }
     private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
     {
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 2);
         Console.Write("Total de portas: ");
         var doorsNumber = short.Parse(Console.ReadLine());
@@ -28,12 +29,11 @@ public static class CreateCarScreen
 
         VehicleRepositoryList.VehicleList.Add(car);
     }
-
     //mostra carro registrado na tela
     private static void ShowCarRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int doorsNumber, string fuelType, decimal horsepower)
     {
         Console.Clear();
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Carro cadastrado com sucesso!");
 
@@ -56,6 +56,6 @@ public static class CreateCarScreen
         Console.SetCursorPosition(3, 12);
         Console.WriteLine($"Potência: {horsepower} cavalos");
 
-        MenuScreen.ControlKey();
+        MenuUtils.ControlKey();
     }
 }

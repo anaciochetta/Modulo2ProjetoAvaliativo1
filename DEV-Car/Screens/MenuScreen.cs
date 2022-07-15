@@ -1,3 +1,7 @@
+using DevCar.Utils;
+using DevCar.Screens.Create;
+using DevCar.Screens.Report;
+using DevCar.Screens.Modify;
 
 namespace DevCar.Screens;
 
@@ -6,7 +10,7 @@ public class MenuScreen
     public static void Init()
     {
         Console.Clear();
-        DrawCanvas();
+        MenuUtils.DrawCanvas();
         ShowOptions();
     }
 
@@ -41,13 +45,13 @@ public class MenuScreen
                 CreateVehicleScreen.Init();
                 break;
             case 2:
-                ModifyVehicleScreen.Init();
+                SelectVehicleToModify.Init();
                 break;
             case 3:
                 SellVehicleScreen.Init();
                 break;
             case 4:
-                VehicleListScreen.Init();
+                ListVehicleScreen.Init();
                 break;
             case 5:
                 ReportScreen.Init();
@@ -61,54 +65,5 @@ public class MenuScreen
         }
     }
 
-    //desenha o quadradadinho
-    public static void DrawCanvas()
-    {
-        PrintHorizontalLine();
 
-        for (int line = 0; line <= 12; line++)
-        {
-            Console.Write("|");
-            for (int i = 0; i <= 45; i++)
-                Console.Write(" ");
-
-            Console.Write("|");
-            Console.Write(Environment.NewLine);
-        }
-
-        PrintHorizontalLine();
-    }
-    public static void PrintHorizontalLine()
-    {
-        Console.Write("+");
-        for (int i = 0; i <= 45; i++)
-            Console.Write("-");
-
-        Console.Write("+");
-        Console.Write(Environment.NewLine);
-    }
-
-    //método para voltar ao menu principal
-    public static void ControlKey()
-    {
-        Console.WriteLine("");
-        Console.WriteLine("Aperte ENTER para voltar ao menu...");
-        ConsoleKeyInfo key;
-        bool isEnter = true;
-        while (isEnter)
-        {
-            key = Console.ReadKey(true);
-
-            if (key.Key == ConsoleKey.Escape)
-            {
-                isEnter = false;
-                break;
-            }
-            else if (key.Key == ConsoleKey.Enter)
-            {
-                Console.Clear();
-                MenuScreen.Init();
-            }
-        }
-    }
 }

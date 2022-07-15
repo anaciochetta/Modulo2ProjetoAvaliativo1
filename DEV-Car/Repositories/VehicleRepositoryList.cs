@@ -14,4 +14,12 @@ public static class VehicleRepositoryList
     public static Vehicle? GetByPlate(string plate)
     { return VehicleList.Where(x => x.Plate == plate).FirstOrDefault(); }
 
+    public static bool VerifyExistentPlate(string plate)
+    {
+        if (VehicleList.Any(vehicle => vehicle.Plate == plate))
+        {
+            return true;
+        }
+        else return false;
+    }
 }

@@ -1,5 +1,6 @@
 using DevCar.Models;
 using DevCar.Repositories;
+using DevCar.Utils;
 
 namespace DevCar.Screens.Create;
 
@@ -9,10 +10,9 @@ class CreatePickupScreen
     {
         CreatePickup(fabricationYear, vehicleName, plate, purchasePrice, color);
     }
-
     private static void CreatePickup(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
     {
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 3);
         Console.Write("Total de portas: ");
         var doorsNumber = short.Parse(Console.ReadLine());
@@ -32,7 +32,6 @@ class CreatePickupScreen
 
         ShowPickupRegistered(pickup.FabricationYear, pickup.Name, pickup.Plate, pickup.ChassisNumber, pickup.PurchasePrice, pickup.Color, pickup.DoorsNumber, pickup.FuelType, pickup.Horsepower, pickup.PickupTruckCapacity);
     }
-
     //mostra camionete registrado na tela
     private static void ShowPickupRegistered(int fabricationYear, string name, string plate, Guid chassisNumber, decimal purchasePrice, EColors color, int doorsNumber, string fuelType, decimal horsepower, decimal pickupTruckCapacity)
     {
@@ -61,6 +60,6 @@ class CreatePickupScreen
         Console.SetCursorPosition(3, 13);
         Console.WriteLine($"Capacidade da caçamba: {pickupTruckCapacity} litros");
 
-        MenuScreen.ControlKey();
+        MenuUtils.ControlKey();
     }
 }

@@ -1,13 +1,13 @@
-using DevCar.Screens.Report;
+using DevCar.Utils;
 
-namespace DevCar.Screens;
+namespace DevCar.Screens.Report;
 
 class ReportScreen
 {
     public static void Init()
     {
         Console.Clear();
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         SelectListScreen();
     }
     private static void SelectListScreen()
@@ -23,6 +23,8 @@ class ReportScreen
         Console.WriteLine("3 - Veículo vendido com o maior preço");
         Console.SetCursorPosition(3, 7);
         Console.WriteLine("4 - Veículo vendido com o menor preço");
+        Console.SetCursorPosition(3, 8);
+        Console.WriteLine("0 - Menu Principal");
 
         Console.SetCursorPosition(3, 13);
         Console.Write("Digite a opção: ");
@@ -31,16 +33,16 @@ class ReportScreen
         switch (option)
         {
             case 1:
-                VehicleReportScreen.Init(true);
+                AvailableReport.Init();
                 break;
             case 2:
-                VehicleReportScreen.Init(false);
+                SoldReport.Init();
                 break;
             case 3:
-                PriceReportScreen.Init(false);
+                HigherPriceReport.Init();
                 break;
             case 4:
-                PriceReportScreen.Init(true);
+                HigherPriceReport.Init();
                 break;
             case 0:
                 MenuScreen.Init();
@@ -50,8 +52,4 @@ class ReportScreen
                 break;
         }
     }
-
-
-
-
 }

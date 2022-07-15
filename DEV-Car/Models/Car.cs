@@ -13,12 +13,8 @@ class Car : Vehicle
         FuelType = fuelType;
         Horsepower = horsepower;
     }
-
-    //TODO: 
     public override string ListVehicleInfo()
     {
-        return $"{base.ListVehicleInfo()} + infos";
+        return $"{base.ListVehicleInfo()} | Combustível: {FuelType} | Potência {Horsepower}";
     }
-
-
 }

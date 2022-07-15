@@ -1,5 +1,6 @@
 using DevCar.Models;
 using DevCar.Repositories;
+using DevCar.Utils;
 
 namespace DevCar.Screens.Create;
 
@@ -9,10 +10,9 @@ class CreateMotoOrTricycleScreen
     {
         CreateMotoOrTricycle(fabricationYear, vehicleName, plate, purchasePrice, color, vehicleType);
     }
-
     private static void CreateMotoOrTricycle(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, string vehicleType)
     {
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 3);
         Console.Write("Potência (em cavalos): ");
         var horsepower = short.Parse(Console.ReadLine());
@@ -60,6 +60,6 @@ class CreateMotoOrTricycleScreen
         Console.SetCursorPosition(3, 11);
         Console.WriteLine($"Potência: {horsepower} cavalos");
 
-        MenuScreen.ControlKey();
+        MenuUtils.ControlKey();
     }
 }

@@ -16,4 +16,9 @@ public class TransferVehicles
         SalePrice = salePrice;
         Date = DateTime.Now;
     }
+
+    public override string ToString()
+    {
+        return $"preço de venda{SalePrice}, data de venda {Date}, {VehicleData}";
+    }
 }

@@ -1,14 +1,15 @@
 using DevCar.Repositories;
 using DevCar.Models;
+using DevCar.Utils;
 
 namespace DevCar.Screens;
 
-public static class VehicleListScreen
+public static class ListVehicleScreen
 {
     public static void Init()
     {
         Console.Clear();
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         SelectListScreen();
     }
     private static void SelectListScreen()
@@ -26,6 +27,8 @@ public static class VehicleListScreen
         Console.WriteLine("4 - Camionete");
         Console.SetCursorPosition(3, 8);
         Console.WriteLine("5 - Todos");
+        Console.SetCursorPosition(3, 9);
+        Console.WriteLine("0 - Menu Principal");
 
         Console.SetCursorPosition(3, 13);
         Console.Write("Digite a opção: ");
@@ -53,21 +56,30 @@ public static class VehicleListScreen
                 break;
         }
     }
+    //imprime no console uma lista com todos os veículos
     private static void AllVehiclesList()
     {
+        MenuUtils.DrawSimpleCanvas();
+        Console.WriteLine("Todos os veículos cadastrados: ");
+        Console.WriteLine("");
         foreach (var vehicle in VehicleRepositoryList.VehicleList)
         {
             Console.WriteLine(vehicle.ListVehicleInfo());
         }
+        MenuUtils.PrintHorizontalLine();
+        MenuUtils.ControlKey();
     }
-
+    //imprime no console uma lista com todos os veículos do tipo selecionado
     private static void FilterandPrintByType<T>() where T : Vehicle
     {
+        MenuUtils.DrawSimpleCanvas();
         IList<Vehicle> repository = VehicleRepositoryList.VehicleList;
         var vehicles = repository.OfType<T>().ToList();
         foreach (var vehicle in vehicles)
         {
             Console.WriteLine(vehicle.ListVehicleInfo());
         }
+        MenuUtils.PrintHorizontalLine();
+        MenuUtils.ControlKey();
     }
 }

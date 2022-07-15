@@ -9,4 +9,9 @@ class Motorcycle : Vehicle
     {
         Horsepower = horsepower;
     }
+
+    public override string ListVehicleInfo()
+    {
+        return $"{base.ListVehicleInfo()} | Potência {Horsepower}";
+    }
 }

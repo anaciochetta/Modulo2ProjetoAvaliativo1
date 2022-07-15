@@ -7,7 +7,7 @@ public static class ColorsUtil
 {
     public static int PrintColorsOptions()
     {
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Digite a cor desejada:");
 

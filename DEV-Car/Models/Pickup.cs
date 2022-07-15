@@ -12,4 +12,8 @@ class Pickup : Vehicle
     {
         PickupTruckCapacity = pickupTruckCapacity;
     }
+    public override string ListVehicleInfo()
+    {
+        return $"{base.ListVehicleInfo()} | Combustível: {FuelType} | Potência {Horsepower}";
+    }
 }

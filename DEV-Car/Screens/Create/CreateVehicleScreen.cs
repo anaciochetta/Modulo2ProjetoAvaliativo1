@@ -1,17 +1,15 @@
-using DevCar.Screens.Create;
 using DevCar.Utils;
 
-namespace DevCar.Screens;
+namespace DevCar.Screens.Create;
 
 public class CreateVehicleScreen
 {
     public static void Init()
     {
         Console.Clear();
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
         SelectVehicleTypeScreen();
     }
-
     //monta a tela para escolher o tipo do veículo
     private static void SelectVehicleTypeScreen()
     {
@@ -50,12 +48,11 @@ public class CreateVehicleScreen
                 break;
         }
     }
-
     //monta a tela para criar o veículo e chama as funções de criação
     private static void CreateVehicle(string vehicleType)
     {
         Console.Clear();
-        MenuScreen.DrawCanvas();
+        MenuUtils.DrawCanvas();
 
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Cadastro de veículo");
