@@ -25,6 +25,7 @@ public class Vehicle
         Color = color;
         IsAvailable = true;
     }
+    //método de venda dos veículos
     public void SellVehicle(string buyerCPF, decimal salePrice)
     {
         TransferVehicles transferdVehicle = new(this, buyerCPF, salePrice);
@@ -32,15 +33,18 @@ public class Vehicle
         this.BuyerCPF = buyerCPF;
         this.IsAvailable = false;
     }
+    //método para listar as informações dos veículos na tela
     public virtual string ListVehicleInfo()
     {
-        var text = $" Nome: {Name} | Placa: {Plate} | Ano de Fabricação: {FabricationYear} | Cor {Color} | Preço de compra: {PurchasePrice}";
+        var text = $" Nome: {Name} | Placa: {Plate} | Ano de Fabricação: {FabricationYear} | Cor {Color} \n| Preço de compra: {PurchasePrice}";
         return text;
     }
+    //método para mudar a cor do veículo
     public void ChangeColor(EColors color)
     {
         this.Color = color;
     }
+    //método para mudar o preço de compra do veículo
     public void ChangePurchasePrice(decimal purchasePrice)
     {
         this.PurchasePrice = purchasePrice;

@@ -18,11 +18,11 @@ public static class PopulationClass
         moto1.IsAvailable = true;
         repository.Add(moto1);
 
-        Tricycle tricycle1 = new(2016, "Trycle Power", "ABC-153", 63000, EColors.Vermelho, 500);
+        Tricycle tricycle1 = new(2016, "Chooper", "ABC-153", 63000, EColors.Vermelho, 500);
         tricycle1.IsAvailable = true;
         repository.Add(tricycle1);
 
-        Pickup pickup1 = new(2020, "Amarok", "CVB-963", 100000, EColors.Preto, 2, EFuel.Diesel, 600, 800);
+        Pickup pickup1 = new(2020, "Amarok", "CVB-963", 100000, EColors.Roxo, 2, EFuel.Diesel, 600, 800);
         pickup1.IsAvailable = true;
         repository.Add(pickup1);
 

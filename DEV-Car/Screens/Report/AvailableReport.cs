@@ -21,11 +21,16 @@ public static class AvailableReport
         MenuUtils.PrintHorizontalLine();
         MenuUtils.ControlKey();
     }
+    //método para imprimir na tela os veículos disponíveis
     private static void FilterAvailableVehicles()
     {
         foreach (var availables in VehicleRepositoryList.VehicleList)
         {
-            if (availables.IsAvailable == true) { Console.WriteLine(availables.ListVehicleInfo()); }
+            if (availables.IsAvailable == true)
+            {
+                Console.WriteLine(availables.ListVehicleInfo());
+                Console.WriteLine("");
+            }
         }
     }
 }

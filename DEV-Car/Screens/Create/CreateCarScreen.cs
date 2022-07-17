@@ -13,7 +13,7 @@ public static class CreateCarScreen
     }
     private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower)
     {
-        EFuel fuelType = (EFuel)FuelUtil.PrintCarFuelOptions();
+        EFuel fuelType = (EFuel)FuelUtil.PrintCarFuelOptions(); //chama tela para listar os tipos de combustível
         CreateVehicleScreen.InputHeader();
         Console.SetCursorPosition(3, 5);
         Console.Write($"Flex ou somente gasolina: {fuelType}");
@@ -53,7 +53,7 @@ public static class CreateCarScreen
 
         MenuUtils.ControlKey();
     }
-
+    //método de input para cadastro
     public static int InputDoorsNumber()
     {
         CreateVehicleScreen.InputHeader();

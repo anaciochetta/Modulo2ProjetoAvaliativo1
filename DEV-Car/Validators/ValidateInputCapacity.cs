@@ -21,7 +21,8 @@ public static class ValidateInputCapacity
     private static bool ValidateInput(decimal capacity)
     {
         if (capacity == 0) { return false; }
-        else if (capacity > 1500) { return false; }
+        else if (capacity > 1500) { return false; }//número máximo de litros que achei numa camionete
+        else if (capacity < 0) { return false; }
         else return true;
     }
 }

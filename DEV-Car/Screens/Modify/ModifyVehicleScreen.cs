@@ -1,6 +1,7 @@
 using DevCar.Repositories;
 using DevCar.Models;
 using DevCar.Utils;
+using DevCar.Validators;
 
 namespace DevCar.Screens.Modify;
 
@@ -54,12 +55,22 @@ public static class ModifyVehicleScreen
     //método para mudar a cor do veículo
     private static void ChangeColor(string plate)
     {
+        Console.Clear();
         EColors color = (EColors)ColorsUtil.PrintColorsOptions();
-        System.Console.WriteLine(color);
+        Console.WriteLine(color);
         Console.Clear();
         MenuUtils.DrawCanvas();
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         vehicle.ChangeColor(color);
+        ShowColorMessage(vehicle);
+    }
+    private static void ShowColorMessage(Vehicle vehicle)
+    {
+        MenuUtils.DrawSimpleCanvas();
+        Console.WriteLine("Cor modificada com sucesso!");
+        Console.WriteLine("");
+        Console.WriteLine(vehicle.ListVehicleInfo());
+        MenuUtils.PrintHorizontalLine();
         MenuUtils.ControlKey();
     }
     //método para mudar o preço de compra do veículo
@@ -67,15 +78,30 @@ public static class ModifyVehicleScreen
     {
         Console.Clear();
         MenuUtils.DrawCanvas();
-
         Console.SetCursorPosition(3, 2);
-        Console.WriteLine("Modificar Valor: ");
-
-        Console.SetCursorPosition(3, 4);
-        Console.WriteLine("Valor de compra: ");
-        decimal salePrice = decimal.Parse(Console.ReadLine());
+        Console.WriteLine("Modificar Valor");
+        decimal salePrice = InputPurchasePrice();
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         vehicle.ChangePurchasePrice(salePrice);
+        ShowPriceMessage(vehicle);
+    }
+    public static decimal InputPurchasePrice()
+    {
+        Console.SetCursorPosition(3, 4);
+        Console.WriteLine("Valor de compra: ");
+        Console.SetCursorPosition(3, 5);
+        decimal purchasePrice = decimal.Parse(Console.ReadLine());
+        ValidateInputPrice.ValidateModify(purchasePrice);
+        return purchasePrice;
+    }
+    private static void ShowPriceMessage(Vehicle vehicle)
+    {
+        MenuUtils.DrawSimpleCanvas();
+        Console.WriteLine("Preço modificado com sucesso!");
+        System.Console.WriteLine("");
+        Console.WriteLine(vehicle.ListVehicleInfo());
+
+        MenuUtils.PrintHorizontalLine();
         MenuUtils.ControlKey();
     }
     //método para deletar veículo do repositório
@@ -84,6 +110,7 @@ public static class ModifyVehicleScreen
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         IList<Vehicle> repository = VehicleRepositoryList.VehicleList;
         repository.Remove(vehicle);
+        MenuUtils.DrawSimpleCanvas();
         Console.WriteLine("Veículo removido com sucesso!");
         MenuUtils.ControlKey();
     }

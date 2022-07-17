@@ -3,6 +3,7 @@ namespace DevCar.Utils;
 
 public static class ColorsUtil
 {
+    //método para imprimir as opções de cores 
     public static int PrintColorsOptions()
     {
         MenuUtils.DrawCanvas();
@@ -19,6 +20,8 @@ public static class ColorsUtil
         Console.WriteLine("4 - Roxo");
         Console.SetCursorPosition(3, 8);
         Console.WriteLine("5 - Prata");
+        Console.SetCursorPosition(3, 9);
+        Console.WriteLine("**Camionetes são fabricadas somente na cor Roxa**");
 
         Console.SetCursorPosition(3, 13);
         Console.Write("Digite a opção: ");

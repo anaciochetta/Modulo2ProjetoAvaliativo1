@@ -65,6 +65,7 @@ public static class ListVehicleScreen
         foreach (var vehicle in VehicleRepositoryList.VehicleList)
         {
             Console.WriteLine(vehicle.ListVehicleInfo());
+            Console.WriteLine();
         }
         MenuUtils.PrintHorizontalLine();
         MenuUtils.ControlKey();
@@ -78,6 +79,7 @@ public static class ListVehicleScreen
         foreach (var vehicle in vehicles)
         {
             Console.WriteLine(vehicle.ListVehicleInfo());
+            Console.WriteLine();
         }
         MenuUtils.PrintHorizontalLine();
         MenuUtils.ControlKey();

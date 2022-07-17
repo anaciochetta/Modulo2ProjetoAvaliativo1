@@ -2,6 +2,7 @@ namespace DevCar.Utils;
 
 class FuelUtil
 {
+    //método para imprimir os tipos de combustível para carro
     public static int PrintCarFuelOptions()
     {
         Console.Clear();
@@ -30,7 +31,7 @@ class FuelUtil
                 return 10;
         }
     }
-
+    //método para imprimir os tipos de combustível para camionete
     public static int PrintPickupFuelOptions()
     {
         Console.Clear();

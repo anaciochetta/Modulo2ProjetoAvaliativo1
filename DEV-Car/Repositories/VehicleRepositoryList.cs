@@ -10,10 +10,11 @@ public static class VehicleRepositoryList
     {
         VehicleList = new List<Vehicle>();
     }
-    public static void UpdateRepository() { }
+
+    //retorna o veículo pela placa
     public static Vehicle? GetByPlate(string plate)
     { return VehicleList.Where(x => x.Plate == plate).FirstOrDefault(); }
-
+    //verifica se existe a placa no repositório
     public static bool VerifyExistentPlate(string plate)
     {
         if (VehicleList.Any(vehicle => vehicle.Plate == plate))

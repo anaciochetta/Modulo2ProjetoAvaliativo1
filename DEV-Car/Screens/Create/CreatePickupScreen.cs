@@ -13,7 +13,7 @@ class CreatePickupScreen
     }
     private static void CreatePickup(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower)
     {
-        EFuel fuelType = (EFuel)FuelUtil.PrintPickupFuelOptions();
+        EFuel fuelType = (EFuel)FuelUtil.PrintPickupFuelOptions(); //chama tela para listar os tipos de combustível
         CreateVehicleScreen.InputHeader();
         Console.SetCursorPosition(3, 5);
         Console.Write($"Diesel ou gasolina: {fuelType}");
@@ -56,6 +56,7 @@ class CreatePickupScreen
 
         MenuUtils.ControlKey();
     }
+    //métodos de input para cadastro
     public static int InputDoorsNumber()
     {
         Console.SetCursorPosition(3, 6);

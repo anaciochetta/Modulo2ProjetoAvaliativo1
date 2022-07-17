@@ -15,6 +15,6 @@ class Car : Vehicle
     }
     public override string ListVehicleInfo()
     {
-        return $"{base.ListVehicleInfo()} | Combustível: {FuelType} | Potência {Horsepower}";
+        return $"{base.ListVehicleInfo()} | Combustível: {FuelType} | Potência: {Horsepower}";
     }
 }

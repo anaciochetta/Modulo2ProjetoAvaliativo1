@@ -7,7 +7,7 @@ public static class ValidateInputName
 {
     public static void Validate(string vehicleName)
     {
-        if (ValidateInput(vehicleName))
+        if (!ValidateInput(vehicleName))
         {
             Console.SetCursorPosition(3, 6);
             Console.WriteLine("Nome inválido!");

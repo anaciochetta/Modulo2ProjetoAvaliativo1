@@ -16,10 +16,8 @@ public static class SelectVehicleToModify
     //tela para colocar a placa do veículo para modificação
     private static void SelecVehicleToModify()
     {
-        MenuUtils.PrintHorizontalLine();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Digite a placa do veículo para modificação:");
-
         string plate = InputPlate();
 
         if (VehicleRepositoryList.VerifyExistentPlate(plate))
@@ -82,7 +80,7 @@ public static class SelectVehicleToModify
         Console.SetCursorPosition(3, 4);
         Console.WriteLine("Placa: ");
         Console.SetCursorPosition(3, 5);
-        string plate = Console.ReadLine();
+        string plate = Console.ReadLine().ToUpper();
         ValidateInputPlate.Validate(plate);
         return plate;
     }

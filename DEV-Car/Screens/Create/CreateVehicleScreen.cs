@@ -64,6 +64,7 @@ public class CreateVehicleScreen
         Console.Clear();
         EColors color = (EColors)ColorsUtil.PrintColorsOptions();
         Console.WriteLine(color);
+
         Console.Clear();
 
         if (vehicleType == "carro")
@@ -72,13 +73,14 @@ public class CreateVehicleScreen
         }
         else if (vehicleType == "pickup")
         {
-            CreatePickupScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower);
+            CreatePickupScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, EColors.Roxo, horsepower);
         }
         else if (vehicleType == "moto" || vehicleType == "triciclo")
         {
             CreateMotoOrTricycleScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower, vehicleType);
         }
     }
+    //método para imprimir o cabeçalho da página
     public static void InputHeader()
     {
         Console.Clear();
@@ -88,7 +90,7 @@ public class CreateVehicleScreen
         Console.SetCursorPosition(3, 3);
         Console.WriteLine("---------------------------------");
     }
-
+    //métodos de input para cadastro
     public static string InputName()
     {
         InputHeader();
@@ -103,7 +105,7 @@ public class CreateVehicleScreen
         InputHeader();
         Console.SetCursorPosition(3, 5);
         Console.Write("Placa: ");
-        string plate = Console.ReadLine();
+        string plate = Console.ReadLine().ToUpper();
         ValidateInputPlate.ValidateCreate(plate);
         return plate;
     }
@@ -111,7 +113,7 @@ public class CreateVehicleScreen
     {
         InputHeader();
         Console.SetCursorPosition(3, 6);
-        Console.Write("Ano de fabricação: (ex: 2000)");
+        Console.Write("Ano de fabricação (ex: 2000):");
         int fabricationYear = int.Parse(Console.ReadLine());
         ValidateInputFabricationYear.Validate(fabricationYear);
         return fabricationYear;
@@ -132,7 +134,7 @@ public class CreateVehicleScreen
         Console.SetCursorPosition(3, 8);
         Console.Write("Potência (em cavalos): ");
         decimal horsepower = decimal.Parse(Console.ReadLine());
-
+        ValidateInputHorsepower.Validate(horsepower);
         return horsepower;
     }
 }

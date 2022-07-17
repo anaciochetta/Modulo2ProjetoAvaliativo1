@@ -22,7 +22,7 @@ public static class SellVehicleScreen
 
         SellVehicle(plate, buyerCPF, salePrice);
     }
-
+    //método para chamar o método de venda e imprimir na tela mensagem de venda
     private static void SellVehicle(string plate, string buyerCPF, decimal salePrice)
     {
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
@@ -33,7 +33,7 @@ public static class SellVehicleScreen
         System.Console.WriteLine($"{vehicle.ListVehicleInfo()}");
         MenuUtils.ControlKey();
     }
-
+    //método para imprimir o cabeçalho da página
     public static void InputHeader()
     {
         Console.Clear();
@@ -41,6 +41,7 @@ public static class SellVehicleScreen
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Digite as informações para realizar a venda:");
     }
+    //métodos de input para realizar a venda
     public static string InputPlate()
     {
         InputHeader();

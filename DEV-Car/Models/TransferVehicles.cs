@@ -8,7 +8,6 @@ public class TransferVehicles
     public DateTime Date { get; set; }
 
     public TransferVehicles() { }
-
     public TransferVehicles(Vehicle vehicleData, string buyerCPF, decimal salePrice)
     {
         VehicleData = vehicleData;
@@ -16,9 +15,8 @@ public class TransferVehicles
         SalePrice = salePrice;
         Date = DateTime.Now;
     }
-
     public override string ToString()
     {
-        return $"Preço de venda: {SalePrice}| Data de venda: {Date} \n Dados do veículo: {VehicleData.ListVehicleInfo()}";
+        return $"Informações do veículo: {VehicleData.Name} \nPreço de venda: {SalePrice}| Data de venda: {Date} | Cpf do comprador: {BuyerCPF} \nDados do veículo: {VehicleData.ListVehicleInfo()}";
     }
 }

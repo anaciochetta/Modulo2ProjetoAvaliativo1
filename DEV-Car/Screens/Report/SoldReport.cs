@@ -21,11 +21,13 @@ public static class SoldReport
         MenuUtils.PrintHorizontalLine();
         MenuUtils.ControlKey();
     }
+    //método para imprimir na tela os veículos vendidos
     private static void FilterSoldVehicles()
     {
-        foreach (var sold in VehicleRepositoryList.VehicleList)
+        foreach (var sold in TransferRepository.TransferData)
         {
-            if (sold.IsAvailable == false) { Console.WriteLine(sold.ListVehicleInfo()); }
+            Console.WriteLine(sold.ToString());
+            Console.WriteLine("");
         }
     }
 }
