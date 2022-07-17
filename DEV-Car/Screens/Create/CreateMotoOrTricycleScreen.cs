@@ -6,16 +6,12 @@ namespace DevCar.Screens.Create;
 
 class CreateMotoOrTricycleScreen
 {
-    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, string vehicleType)
+    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower, string vehicleType)
     {
-        CreateMotoOrTricycle(fabricationYear, vehicleName, plate, purchasePrice, color, vehicleType);
+        CreateMotoOrTricycle(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower, vehicleType);
     }
-    private static void CreateMotoOrTricycle(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, string vehicleType)
+    private static void CreateMotoOrTricycle(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower, string vehicleType)
     {
-        MenuUtils.DrawCanvas();
-        Console.SetCursorPosition(3, 3);
-        Console.Write("Potência (em cavalos): ");
-        var horsepower = short.Parse(Console.ReadLine());
 
         if (vehicleType == "moto")
         {

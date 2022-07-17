@@ -1,31 +1,24 @@
 using DevCar.Models;
 using DevCar.Repositories;
 using DevCar.Utils;
+using DevCar.Validators;
 
 namespace DevCar.Screens.Create;
 
 class CreatePickupScreen
 {
-    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
+    public static void Init(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower)
     {
-        CreatePickup(fabricationYear, vehicleName, plate, purchasePrice, color);
+        CreatePickup(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower);
     }
-    private static void CreatePickup(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color)
+    private static void CreatePickup(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower)
     {
         EFuel fuelType = (EFuel)FuelUtil.PrintPickupFuelOptions();
-        Console.Clear();
-        MenuUtils.DrawCanvas();
-        Console.SetCursorPosition(3, 3);
-        Console.Write($"Diesel ou gasolina: {fuelType}");
-        Console.SetCursorPosition(3, 4);
-        Console.Write("Total de portas: ");
-        var doorsNumber = short.Parse(Console.ReadLine());
+        CreateVehicleScreen.InputHeader();
         Console.SetCursorPosition(3, 5);
-        Console.Write("Potência (em cavalos): ");
-        var horsepower = short.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 6);
-        Console.Write("Capacidade de carregamento (litros): ");
-        var capacity = decimal.Parse(Console.ReadLine());
+        Console.Write($"Diesel ou gasolina: {fuelType}");
+        int doorsNumber = InputDoorsNumber();
+        decimal capacity = InputCapacity();
 
         Pickup pickup = new(fabricationYear, vehicleName, plate, purchasePrice, color, doorsNumber, fuelType, horsepower, capacity);
 
@@ -62,5 +55,21 @@ class CreatePickupScreen
         Console.WriteLine($"Capacidade da caçamba: {pickupTruckCapacity} litros");
 
         MenuUtils.ControlKey();
+    }
+    public static int InputDoorsNumber()
+    {
+        Console.SetCursorPosition(3, 6);
+        Console.Write("Total de portas: ");
+        int doorsNumber = int.Parse(Console.ReadLine());
+        ValidateInputDoorsNumber.ValidatePickup(doorsNumber);
+        return doorsNumber;
+    }
+    public static decimal InputCapacity()
+    {
+        Console.SetCursorPosition(3, 7);
+        Console.Write("Capacidade de carregamento (litros): ");
+        decimal capacity = decimal.Parse(Console.ReadLine());
+        ValidateInputCapacity.Validate(capacity);
+        return capacity;
     }
 }

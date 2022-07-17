@@ -55,9 +55,7 @@ public class CreateVehicleScreen
     private static void CreateVehicle(string vehicleType)
     {
         InputHeader();
-        Console.SetCursorPosition(3, 4);
-        Console.Write("Nome: ");
-        string vehicleName = Console.ReadLine();
+        string vehicleName = InputName();
         string plate = InputPlate();
         int fabricationYear = InputYearFabrication();
         decimal purchasePrice = InputPurchasePrice();
@@ -74,14 +72,14 @@ public class CreateVehicleScreen
         }
         else if (vehicleType == "pickup")
         {
-            CreatePickupScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color);
+            CreatePickupScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower);
         }
         else if (vehicleType == "moto" || vehicleType == "triciclo")
         {
-            CreateMotoOrTricycleScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, vehicleType);
+            CreateMotoOrTricycleScreen.Init(fabricationYear, vehicleName, plate, purchasePrice, color, horsepower, vehicleType);
         }
     }
-    private static void InputHeader()
+    public static void InputHeader()
     {
         Console.Clear();
         MenuUtils.DrawCanvas();
@@ -91,22 +89,31 @@ public class CreateVehicleScreen
         Console.WriteLine("---------------------------------");
     }
 
+    public static string InputName()
+    {
+        InputHeader();
+        Console.SetCursorPosition(3, 4);
+        Console.Write("Nome: ");
+        string vehicleName = Console.ReadLine();
+        ValidateInputName.Validate(vehicleName);
+        return vehicleName;
+    }
     public static string InputPlate()
     {
         InputHeader();
         Console.SetCursorPosition(3, 5);
         Console.Write("Placa: ");
         string plate = Console.ReadLine();
-        ValidateInputPlate.ValidatePlate(plate);
+        ValidateInputPlate.ValidateCreate(plate);
         return plate;
     }
     public static int InputYearFabrication()
     {
         InputHeader();
         Console.SetCursorPosition(3, 6);
-        Console.Write("Ano de fabricação: ");
+        Console.Write("Ano de fabricação: (ex: 2000)");
         int fabricationYear = int.Parse(Console.ReadLine());
-
+        ValidateInputFabricationYear.Validate(fabricationYear);
         return fabricationYear;
     }
 
@@ -116,17 +123,15 @@ public class CreateVehicleScreen
         Console.SetCursorPosition(3, 7);
         Console.Write("Valor de compra: ");
         decimal purchasePrice = decimal.Parse(Console.ReadLine());
-
+        ValidateInputPrice.ValidatePurchasePrice(purchasePrice);
         return purchasePrice;
     }
-
-    //TODO: ARRUMAR OS OUTROS DA POTENCIA
 
     public static decimal InputHorsepower()
     {
         Console.SetCursorPosition(3, 8);
         Console.Write("Potência (em cavalos): ");
-        decimal horsepower = short.Parse(Console.ReadLine());
+        decimal horsepower = decimal.Parse(Console.ReadLine());
 
         return horsepower;
     }

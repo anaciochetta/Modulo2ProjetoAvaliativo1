@@ -1,6 +1,7 @@
 using DevCar.Models;
 using DevCar.Repositories;
 using DevCar.Utils;
+using DevCar.Validators;
 
 namespace DevCar.Screens.Create;
 
@@ -13,15 +14,10 @@ public static class CreateCarScreen
     private static void CreateCar(int fabricationYear, string vehicleName, string plate, decimal purchasePrice, EColors color, decimal horsepower)
     {
         EFuel fuelType = (EFuel)FuelUtil.PrintCarFuelOptions();
-        Console.Clear();
-        MenuUtils.DrawCanvas();
-        Console.SetCursorPosition(3, 2);
+        CreateVehicleScreen.InputHeader();
+        Console.SetCursorPosition(3, 5);
         Console.Write($"Flex ou somente gasolina: {fuelType}");
-        Console.SetCursorPosition(3, 3);
-        Console.Write("Total de portas: ");
-        var doorsNumber = short.Parse(Console.ReadLine());
-        Console.SetCursorPosition(3, 4);
-
+        int doorsNumber = InputDoorsNumber();
 
         Car car = new(fabricationYear, vehicleName, plate, purchasePrice, color, doorsNumber, fuelType, horsepower);
 
@@ -56,5 +52,15 @@ public static class CreateCarScreen
         Console.WriteLine($"Potência: {horsepower} cavalos");
 
         MenuUtils.ControlKey();
+    }
+
+    public static int InputDoorsNumber()
+    {
+        CreateVehicleScreen.InputHeader();
+        Console.SetCursorPosition(3, 6);
+        Console.Write("Total de portas: ");
+        int doorsNumber = int.Parse(Console.ReadLine());
+        ValidateInputDoorsNumber.ValidateCar(doorsNumber);
+        return doorsNumber;
     }
 }
