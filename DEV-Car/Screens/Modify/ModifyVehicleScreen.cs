@@ -80,18 +80,30 @@ public static class ModifyVehicleScreen
         MenuUtils.DrawCanvas();
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Modificar Valor");
-        decimal salePrice = InputPurchasePrice();
+        decimal salePrice = ReadPurchasePrice();
         Vehicle? vehicle = VehicleRepositoryList.GetByPlate(plate);
         vehicle.ChangePurchasePrice(salePrice);
         ShowPriceMessage(vehicle);
     }
-    public static decimal InputPurchasePrice()
+    public static decimal ReadPurchasePrice()
     {
         Console.SetCursorPosition(3, 4);
         Console.WriteLine("Valor de compra: ");
         Console.SetCursorPosition(3, 5);
         decimal purchasePrice = decimal.Parse(Console.ReadLine());
-        ValidateInputPrice.ValidateModify(purchasePrice);
+
+        while (!ValidateInputPrice.Validate(purchasePrice))
+        {
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Valor inválido!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            Console.SetCursorPosition(3, 4);
+            Console.WriteLine("Valor de compra: ");
+            Console.SetCursorPosition(3, 5);
+            purchasePrice = decimal.Parse(Console.ReadLine());
+        }
         return purchasePrice;
     }
     private static void ShowPriceMessage(Vehicle vehicle)

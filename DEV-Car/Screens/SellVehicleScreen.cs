@@ -16,9 +16,9 @@ public static class SellVehicleScreen
     private static void SelecVehicleToSell()
     {
         InputHeader();
-        string plate = InputPlate();
-        string buyerCPF = InputCPF();
-        decimal salePrice = InputSalePrice();
+        string plate = ReadPlate();
+        string buyerCPF = ReadCPF();
+        decimal salePrice = ReadSalePrice();
 
         SellVehicle(plate, buyerCPF, salePrice);
     }
@@ -42,32 +42,68 @@ public static class SellVehicleScreen
         Console.WriteLine("Digite as informações para realizar a venda:");
     }
     //métodos de input para realizar a venda
-    public static string InputPlate()
+    public static string ReadPlate()
     {
         InputHeader();
         Console.SetCursorPosition(3, 4);
         Console.Write("Placa: ");
         string plate = Console.ReadLine();
-        ValidateInputPlate.Validate(plate);
+
+        while (!ValidateInputPlate.Validate(plate))
+        {
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Placa inválida!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            InputHeader();
+            Console.SetCursorPosition(3, 4);
+            Console.Write("Placa: ");
+            plate = Console.ReadLine();
+        }
         return plate;
     }
 
-    public static string InputCPF()
+    public static string ReadCPF()
     {
         InputHeader();
         Console.SetCursorPosition(3, 6);
         Console.WriteLine("CPF do comprador: ");
         string buyerCPF = Console.ReadLine();
-        ValidateInputCPF.Validate(buyerCPF);
+
+        while (!ValidateInputCPF.Validate(buyerCPF))
+        {
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("CPF inválidO!");
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            InputHeader();
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("CPF do comprador: ");
+            buyerCPF = Console.ReadLine();
+        }
         return buyerCPF;
     }
-    public static decimal InputSalePrice()
+    public static decimal ReadSalePrice()
     {
         InputHeader();
         Console.SetCursorPosition(3, 8);
         Console.WriteLine("Preço de venda: ");
         decimal salePrice = decimal.Parse(Console.ReadLine());
-        ValidateInputPrice.ValidateSalePrice(salePrice);
+
+        while (!ValidateInputPrice.Validate(salePrice))
+        {
+            Console.SetCursorPosition(3, 9);
+            Console.WriteLine("Valor inválido!");
+            Console.SetCursorPosition(3, 10);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            InputHeader();
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine("Preço de venda: ");
+            salePrice = decimal.Parse(Console.ReadLine());
+        }
         return salePrice;
     }
 }

@@ -18,7 +18,7 @@ public static class SelectVehicleToModify
     {
         Console.SetCursorPosition(3, 2);
         Console.WriteLine("Digite a placa do veículo para modificação:");
-        string plate = InputPlate();
+        string plate = ReadPlate();
 
         if (VehicleRepositoryList.VerifyExistentPlate(plate))
         {
@@ -75,13 +75,26 @@ public static class SelectVehicleToModify
         }
     }
 
-    public static string InputPlate()
+    public static string ReadPlate()
     {
         Console.SetCursorPosition(3, 4);
-        Console.WriteLine("Placa: ");
-        Console.SetCursorPosition(3, 5);
-        string plate = Console.ReadLine().ToUpper();
-        ValidateInputPlate.Validate(plate);
+        Console.Write("Placa: ");
+        string plate = Console.ReadLine();
+
+        while (!ValidateInputPlate.Validate(plate))
+        {
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Placa inválida!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            Console.Clear();
+            Console.SetCursorPosition(3, 2);
+            Console.WriteLine("Digite a placa do veículo para modificação:");
+            Console.SetCursorPosition(3, 4);
+            Console.Write("Placa: ");
+            plate = Console.ReadLine();
+        }
         return plate;
     }
 }

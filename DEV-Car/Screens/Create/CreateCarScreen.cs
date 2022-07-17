@@ -17,7 +17,7 @@ public static class CreateCarScreen
         CreateVehicleScreen.InputHeader();
         Console.SetCursorPosition(3, 5);
         Console.Write($"Flex ou somente gasolina: {fuelType}");
-        int doorsNumber = InputDoorsNumber();
+        int doorsNumber = ReadDoorsNumber();
 
         Car car = new(fabricationYear, vehicleName, plate, purchasePrice, color, doorsNumber, fuelType, horsepower);
 
@@ -54,13 +54,25 @@ public static class CreateCarScreen
         MenuUtils.ControlKey();
     }
     //método de input para cadastro
-    public static int InputDoorsNumber()
+    public static int ReadDoorsNumber()
     {
         CreateVehicleScreen.InputHeader();
         Console.SetCursorPosition(3, 6);
         Console.Write("Total de portas: ");
         int doorsNumber = int.Parse(Console.ReadLine());
-        ValidateInputDoorsNumber.ValidateCar(doorsNumber);
+        while (doorsNumber > 4 || doorsNumber < 2)
+        {
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Número de portas inválido!");
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            Console.Clear();
+            CreateVehicleScreen.InputHeader();
+            Console.SetCursorPosition(3, 6);
+            Console.Write("Total de portas: ");
+            doorsNumber = int.Parse(Console.ReadLine());
+        }
         return doorsNumber;
     }
 }

@@ -1,23 +1,10 @@
-using DevCar.Screens.Create;
 using System.Text.RegularExpressions;
 
 namespace DevCar.Validators;
 
 public static class ValidateInputName
 {
-    public static void Validate(string vehicleName)
-    {
-        if (!ValidateInput(vehicleName))
-        {
-            Console.SetCursorPosition(3, 6);
-            Console.WriteLine("Nome inválido!");
-            Console.SetCursorPosition(3, 7);
-            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
-            Console.ReadLine();
-            CreateVehicleScreen.InputName();
-        }
-    }
-    private static bool ValidateInput(string vehicleName)
+    public static bool Validate(string vehicleName)
     {
         //verifica se está vazio ou null
         if (string.IsNullOrWhiteSpace(vehicleName)) { return false; }

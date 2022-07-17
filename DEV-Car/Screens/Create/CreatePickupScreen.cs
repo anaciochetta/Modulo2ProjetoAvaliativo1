@@ -17,8 +17,8 @@ class CreatePickupScreen
         CreateVehicleScreen.InputHeader();
         Console.SetCursorPosition(3, 5);
         Console.Write($"Diesel ou gasolina: {fuelType}");
-        int doorsNumber = InputDoorsNumber();
-        decimal capacity = InputCapacity();
+        int doorsNumber = ReadDoorsNumber();
+        decimal capacity = ReadCapacity();
 
         Pickup pickup = new(fabricationYear, vehicleName, plate, purchasePrice, color, doorsNumber, fuelType, horsepower, capacity);
 
@@ -57,20 +57,44 @@ class CreatePickupScreen
         MenuUtils.ControlKey();
     }
     //métodos de input para cadastro
-    public static int InputDoorsNumber()
+    public static int ReadDoorsNumber()
     {
         Console.SetCursorPosition(3, 6);
         Console.Write("Total de portas: ");
         int doorsNumber = int.Parse(Console.ReadLine());
-        ValidateInputDoorsNumber.ValidatePickup(doorsNumber);
+
+        while (doorsNumber > 4 || doorsNumber < 2)
+        {
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Número de portas inválido!");
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            Console.Clear();
+            Console.SetCursorPosition(3, 6);
+            Console.Write("Total de portas: ");
+            doorsNumber = int.Parse(Console.ReadLine());
+        }
         return doorsNumber;
     }
-    public static decimal InputCapacity()
+    public static decimal ReadCapacity()
     {
         Console.SetCursorPosition(3, 7);
         Console.Write("Capacidade de carregamento (litros): ");
         decimal capacity = decimal.Parse(Console.ReadLine());
-        ValidateInputCapacity.Validate(capacity);
+
+        while (!ValidateInputCapacity.Validate(capacity))
+        {
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine("Capacidade inválida!");
+            Console.SetCursorPosition(3, 9);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            Console.Clear();
+            Console.SetCursorPosition(3, 7);
+            Console.Write("Capacidade de carregamento (litros): ");
+            capacity = decimal.Parse(Console.ReadLine());
+        }
         return capacity;
     }
 }

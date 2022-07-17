@@ -1,24 +1,10 @@
-using DevCar.Repositories;
-using DevCar.Screens;
 using System.Text.RegularExpressions;
 
 namespace DevCar.Validators;
 
 public static class ValidateInputCPF
 {
-    public static void Validate(string buyerCPF)
-    {
-        if (!ValidateInput(buyerCPF))
-        {
-            Console.SetCursorPosition(3, 7);
-            Console.WriteLine("CPF inválidO!");
-            Console.SetCursorPosition(3, 8);
-            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
-            Console.ReadLine();
-            SellVehicleScreen.InputCPF();
-        }
-    }
-    private static bool ValidateInput(string buyerCPF)
+    public static bool Validate(string buyerCPF)
     {
         //verifica se está vazio ou null
         if (string.IsNullOrWhiteSpace(buyerCPF)) { return false; }

@@ -1,5 +1,7 @@
 using DevCar.Utils;
 using DevCar.Validators;
+using DevCar.Repositories;
+using System.Text.RegularExpressions;
 
 namespace DevCar.Screens.Create;
 
@@ -55,11 +57,11 @@ public class CreateVehicleScreen
     private static void CreateVehicle(string vehicleType)
     {
         InputHeader();
-        string vehicleName = InputName();
-        string plate = InputPlate();
-        int fabricationYear = InputYearFabrication();
-        decimal purchasePrice = InputPurchasePrice();
-        decimal horsepower = InputHorsepower();
+        string vehicleName = ReadName();
+        string plate = ReadPlate();
+        int fabricationYear = ReadYearFabrication();
+        decimal purchasePrice = ReadPurchasePrice();
+        decimal horsepower = ReadHorsepower();
         Console.SetCursorPosition(3, 9);
         Console.Clear();
         EColors color = (EColors)ColorsUtil.PrintColorsOptions();
@@ -91,50 +93,122 @@ public class CreateVehicleScreen
         Console.WriteLine("---------------------------------");
     }
     //métodos de input para cadastro
-    public static string InputName()
+    public static string ReadName()
     {
         InputHeader();
         Console.SetCursorPosition(3, 4);
         Console.Write("Nome: ");
         string vehicleName = Console.ReadLine();
-        ValidateInputName.Validate(vehicleName);
+
+        while (!ValidateInputName.Validate(vehicleName))
+        {
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Nome inválido!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            InputHeader();
+            Console.SetCursorPosition(3, 4);
+            Console.Write("Nome: ");
+            vehicleName = Console.ReadLine();
+        }
         return vehicleName;
     }
-    public static string InputPlate()
+    public static string ReadPlate()
     {
         InputHeader();
         Console.SetCursorPosition(3, 5);
         Console.Write("Placa: ");
         string plate = Console.ReadLine().ToUpper();
-        ValidateInputPlate.ValidateCreate(plate);
+
+        while (VehicleRepositoryList.VerifyExistentPlate(plate))
+        {
+            //verifica se a placa já existe no repositório
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Placa já existente!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            InputHeader();
+            Console.SetCursorPosition(3, 5);
+            Console.Write("Placa: ");
+            plate = Console.ReadLine().ToUpper();
+        }
+        while (!ValidateInputPlate.Validate(plate))
+        {
+            //verifica os inputs possíveis
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Placa inválida!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            InputHeader();
+            Console.SetCursorPosition(3, 5);
+            Console.Write("Placa: ");
+            plate = Console.ReadLine().ToUpper();
+        }
         return plate;
     }
-    public static int InputYearFabrication()
+    public static int ReadYearFabrication()
     {
         InputHeader();
         Console.SetCursorPosition(3, 6);
         Console.Write("Ano de fabricação (ex: 2000):");
         int fabricationYear = int.Parse(Console.ReadLine());
-        ValidateInputFabricationYear.Validate(fabricationYear);
+        Regex year = new("[12]{1}[90]{1}[0-9]{2}");
+        while (!year.IsMatch(fabricationYear.ToString()))
+        {
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Ano de fabricação inválido!");
+            Console.SetCursorPosition(3, 8);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            InputHeader();
+            Console.SetCursorPosition(3, 6);
+            Console.Write("Ano de fabricação (ex: 2000):");
+            fabricationYear = int.Parse(Console.ReadLine());
+        }
         return fabricationYear;
     }
 
-    public static decimal InputPurchasePrice()
+    public static decimal ReadPurchasePrice()
     {
         InputHeader();
         Console.SetCursorPosition(3, 7);
         Console.Write("Valor de compra: ");
         decimal purchasePrice = decimal.Parse(Console.ReadLine());
-        ValidateInputPrice.ValidatePurchasePrice(purchasePrice);
+
+        while (!ValidateInputPrice.Validate(purchasePrice))
+        {
+            Console.SetCursorPosition(3, 6);
+            Console.WriteLine("Valor inválido!");
+            Console.SetCursorPosition(3, 7);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            InputHeader();
+            Console.SetCursorPosition(3, 7);
+            Console.Write("Valor de compra: ");
+            purchasePrice = decimal.Parse(Console.ReadLine());
+        }
         return purchasePrice;
     }
 
-    public static decimal InputHorsepower()
+    public static decimal ReadHorsepower()
     {
         Console.SetCursorPosition(3, 8);
         Console.Write("Potência (em cavalos): ");
         decimal horsepower = decimal.Parse(Console.ReadLine());
-        ValidateInputHorsepower.Validate(horsepower);
+
+        while (!ValidateInputHorsepower.Validate(horsepower))
+        {
+            Console.SetCursorPosition(3, 9);
+            Console.WriteLine("Valor inválido!");
+            Console.SetCursorPosition(3, 10);
+            Console.WriteLine("Aperte 'ENTER' para inserir novamente");
+            Console.ReadLine();
+            Console.SetCursorPosition(3, 8);
+            Console.Write("Potência (em cavalos): ");
+            horsepower = decimal.Parse(Console.ReadLine());
+        }
         return horsepower;
     }
 }
